@@ -1,6 +1,6 @@
 import { Router } from 'react-router-dom';
 import './App.css';
-import Loading from './pages/loading';
+import Loading from './pages/Loading';
 
 function App() {
   return (
