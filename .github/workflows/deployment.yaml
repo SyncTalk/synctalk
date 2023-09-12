@@ -17,10 +17,9 @@ jobs:
         timeout-minutes: 1
 
       - run: ls -a
-      - run: lsof
 
       - name: change to frontend directory
-        run: mv frontend/* frontend/.* . && rm frontend
+        run: mv -fv frontend/* .
         timeout-minutes: 1
 
       - run: ls -a
