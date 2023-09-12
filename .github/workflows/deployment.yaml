@@ -7,17 +7,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-frontend:
     runs-on: ubuntu-22.04
     steps:
       - name: checkout latest commit
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: frontend
         timeout-minutes: 1
 
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version-file: frontend/.nvmrc
+          node-version-file: .nvmrc
           cache: npm
         timeout-minutes: 1
 
