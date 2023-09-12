@@ -26,7 +26,7 @@ jobs:
         timeout-minutes: 1
 
       - name: remove frontend directory
-        run: rm -v frontend
+        run: rm -rv frontend
         timeout-minutes: 1
 
       - run: ls -a
