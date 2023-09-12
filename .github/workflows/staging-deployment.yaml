@@ -1,4 +1,4 @@
-name: deployment
+name: staging-deployment
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   deploy-frontend:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout latest commit
+      - name: sparse checkout frontend directory
         uses: actions/checkout@v4
         with:
           sparse-checkout: frontend
@@ -71,23 +71,23 @@ jobs:
         with:
           context: .
           push: true
-          tags: registry.digitalocean.com/synctalk/web-server
+          tags: registry.digitalocean.com/synctalk/web-server:staging
         timeout-minutes: 5
 
       - name: deploy web server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          host: ${{ secrets.STAGING_SERVER_HOST }}
+          username: ${{ secrets.STAGING_SERVER_USERNAME }}
+          key: ${{ secrets.STAGING_SERVER_KEY }}
           script: |
             # pull new web server image
-            docker pull registry.digitalocean.com/synctalk/web-server
+            docker pull registry.digitalocean.com/synctalk/web-server:staging
             # stop old web server container
             docker stop web-server
             # remove old web server container
             docker rm web-server
             # create and run new web server container from new web server image
-            docker run -detach --name web-server --publish 80:80 registry.digitalocean.com/synctalk/web-server
+            docker run -detach --name web-server --publish 80:80 registry.digitalocean.com/synctalk/web-server:staging
         timeout-minutes: 1
     timeout-minutes: 10
