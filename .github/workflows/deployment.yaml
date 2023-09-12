@@ -17,8 +17,6 @@ jobs:
           sparse-checkout-cone-mode: false
         timeout-minutes: 1
 
-      - run: ls -a
-
       - name: move files from frontend directory to current directory
         run: |
           shopt -s dotglob
@@ -29,8 +27,6 @@ jobs:
       - name: remove frontend directory
         run: rm -rv frontend
         timeout-minutes: 1
-
-      - run: ls -a
 
       - name: setup node.js
         uses: actions/setup-node@v3
