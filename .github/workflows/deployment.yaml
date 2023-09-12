@@ -16,6 +16,10 @@ jobs:
           sparse-checkout: frontend
         timeout-minutes: 1
 
+      - name: change to frontend directory
+        run: cd frontend
+        timeout-minutes: 1
+
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
