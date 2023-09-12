@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UploadSerializer
 from rest_framework.viewsets import ViewSet
+from django.conf import settings
+from .functions import splitTextIntoSentences
 import os
 
 # Create your views here.
@@ -13,7 +15,6 @@ class FileUploadView(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
-        print(request.data)
         file_serializer = UploadSerializer(data=request.data)
 
         if file_serializer.is_valid():
@@ -21,22 +22,20 @@ class FileUploadView(APIView):
             text_file = file_serializer.validated_data.get('text')
             translation_file = file_serializer.validated_data.get('translation')
             
-            # Define a temporary directory for file storage
-            temp_dir = 'syncTalk_app/uploadStorage'
-            
             #save the audio file
             if audio_file:
-                with open(os.path.join(temp_dir, audio_file.name), 'wb+') as destination:
+                with open(os.path.join(settings.MEDIA_ROOT, audio_file.name), 'wb') as destination:
                     for chunk in audio_file.chunks():
                         destination.write(chunk)
 
             #save the text file
             if text_file:
-                with open(os.path.join(temp_dir, text_file.name), 'wb+') as destination:
+                splitTextIntoSentences(text_file)
+                with open(os.path.join(settings.MEDIA_ROOT, text_file.name), 'wb') as destination:
                     for chunk in text_file.chunks():
                         destination.write(chunk)
-
-
+                
+                
             return Response({audio_file.name,text_file.name}, status=status.HTTP_200_OK)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
