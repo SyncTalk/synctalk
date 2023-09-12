@@ -3,7 +3,7 @@ name: deployment
 on:
   push:
     branches:
-      - production
+      - staging
   workflow_dispatch:
 
 jobs:
