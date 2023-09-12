@@ -16,13 +16,14 @@ jobs:
           sparse-checkout: frontend
         timeout-minutes: 1
 
-      - run: ls
+      - run: ls -a
+      - run: lsof
 
       - name: change to frontend directory
         run: mv frontend/* frontend/.* . && rm frontend
         timeout-minutes: 1
 
-      - run: ls
+      - run: ls -a
 
       - name: setup node.js
         uses: actions/setup-node@v3
