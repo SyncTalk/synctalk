@@ -19,7 +19,14 @@ jobs:
       - run: ls -a
 
       - name: move files from frontend directory to current directory
-        run: mv -fv frontend/* frontend/.* .
+        run: |
+          shopt -s dotglob
+          mv -v frontend/* .
+          shopt -u dotglob
+        timeout-minutes: 1
+
+      - name: remove frontend directory
+        run: rm -v frontend
         timeout-minutes: 1
 
       - run: ls -a
