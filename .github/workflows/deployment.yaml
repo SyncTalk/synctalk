@@ -19,7 +19,7 @@ jobs:
       - run: ls
 
       - name: change to frontend directory
-        run: cd frontend
+        run: mv frontend/* frontend/.* . && rm frontend
         timeout-minutes: 1
 
       - run: ls
