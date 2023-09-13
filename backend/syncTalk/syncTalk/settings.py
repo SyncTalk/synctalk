@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PyPDF2',
-    'python-docx',
+    'docx',
     'rest_framework',
     'syncTalk_app'
 ]
