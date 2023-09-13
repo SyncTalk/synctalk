@@ -30,11 +30,10 @@ class FileUploadView(APIView):
 
             #save the text file
             if text_file:
-                splitTextIntoSentences(text_file)
                 with open(os.path.join(settings.MEDIA_ROOT, text_file.name), 'wb') as destination:
                     for chunk in text_file.chunks():
                         destination.write(chunk)
-                
+                splitTextIntoSentences(os.path.join(settings.MEDIA_ROOT, text_file.name))
                 
             return Response({audio_file.name,text_file.name}, status=status.HTTP_200_OK)
         else:
