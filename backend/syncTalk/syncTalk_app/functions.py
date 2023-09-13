@@ -2,7 +2,7 @@
 import os
 import json
 import PyPDF2
-import docx 
+import docx
 from django.conf import settings
 
 def blockStringSplit(block, sentenceDict,strSentence):
@@ -42,6 +42,14 @@ def splitTextIntoSentences(file_path):
                 pageobj = pdfReader.pages[pageNum]
                 str = pageobj.extract_text()
                 strSentence = blockStringSplit(str, sentenceDict, strSentence)
+            if(strSentence[1]) :
+                sentenceDict[strSentence[0]] = strSentence[1]
+        elif (extension == 'docx'):
+            docxFileObj = open(file_path, 'rb')
+            document = docx.Document(docxFileObj)
+            for para in document.paragraphs:
+                text = para.text
+                strSentence = blockStringSplit(text, sentenceDict, strSentence)
             if(strSentence[1]) :
                 sentenceDict[strSentence[0]] = strSentence[1]
         json.dump(sentenceDict, destination)
