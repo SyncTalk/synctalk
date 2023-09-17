@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Text = ({ text, currentTime }) => {
+const Text = ({ text, currentTime, onTextUpdate }) => {
     const [currentLine, setCurrentLine] = useState(0);
 
     useEffect(() => {
@@ -14,7 +14,12 @@ const Text = ({ text, currentTime }) => {
         if (newLine !== currentLine) {
             setCurrentLine(newLine);
         }
-    }, [text, currentTime, currentLine]);
+
+        // Call the onTextUpdate function with the updated text
+        if (onTextUpdate) {
+            onTextUpdate(text);
+        }
+    }, [text, currentTime, currentLine, onTextUpdate]);
 
     return (
         <div className="Text">

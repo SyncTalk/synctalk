@@ -1,12 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faBackward, faForward, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import VolumeControl from './VolumeControl.js';
 import SpeedControl from './SpeedControl';
 import './AudioPlayer.css';
 
-const AudioPlayer = () => {
+
+export const TextWithSpeaker = ({ text }) => {
+    const [currentTime, setCurrentTime] = useState(0);
+
+    const handleTextClick = (event) => {
+        const audio = document.getElementById('audio');
+        const text = event.target;
+        const rect = text.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const width = rect.right - rect.left;
+        const percent = x / width;
+        const newTime = percent * audio.duration;
+        audio.currentTime = newTime;
+        setCurrentTime(newTime);
+    };
+
+    return (
+        <div className="TextWithSpeaker">
+            <span className="Text">{text}</span>
+            <button className="SpeakerButton" onClick={handleTextClick}>
+                <FontAwesomeIcon icon={faVolumeUp} />
+            </button>
+        </div>
+    );
+};
+
+export const AudioPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -76,5 +102,3 @@ const AudioPlayer = () => {
         </div>
     );
 };
-
-export default AudioPlayer;
