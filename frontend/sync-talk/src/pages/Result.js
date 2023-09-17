@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import {AudioPlayer, TextWithSpeaker} from '../components/AudioPlayer';
+import AudioPlayer from '../components/AudioPlayer';
+import TextWithSpeaker from '../components/TextWithSpeaker';
 import Text from '../components/Text';
 import './css/Result.css';
+import textData from '../test.json';
 
 const Result = () => {
     const [currentTime, setCurrentTime] = useState(0);
-    const [text, setText] = useState([
-        { time: 0, text: 'Line 1' },
-        { time: 10, text: 'Line 2' },
-        { time: 20, text: 'Line 3' },
-    ]);
 
     const handleTimeUpdate = (time) => {
         setCurrentTime(time);
@@ -21,11 +18,11 @@ const Result = () => {
                 <h1>Result Page</h1>
             </div>
             <div className="Body">
-            <div className="TextContainer">
-                <TextWithSpeaker text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
-                <TextWithSpeaker text="Sed euismod, nunc vel bibendum bibendum, elit elit bibendum."/>
-                <TextWithSpeaker text="Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas." />
-            </div>
+                <div className="TextContainer">
+                    {textData.map(({ time, text }) => (
+                        <TextWithSpeaker key={time} text={text} time={time} />
+                    ))}
+                </div>
             </div>
             <div className="Footer">
                 <AudioPlayer onTimeUpdate={handleTimeUpdate} />
