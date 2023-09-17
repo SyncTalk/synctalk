@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUpload, faDownload, faInfoCircle, faRectangleXmark } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
