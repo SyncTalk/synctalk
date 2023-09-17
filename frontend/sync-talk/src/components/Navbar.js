@@ -1,7 +1,10 @@
 import React from 'react';
-import { Nav, NavLeft, NavRight, HomeBtnLink, UploadBtnLink, DownloadBtnLink, AboutBtnLink } from './NavBarElements';
+import { useLocation } from 'react-router-dom';
+import { Nav, NavLeft, NavRight, HomeBtnLink, UploadBtnLink, DownloadBtnLink, AboutBtnLink, CancelBtnLink } from './NavBarElements';
 
-const Navbar = ({ page }) => {
+const Navbar = () => {
+    const location = useLocation();
+    const page = location.pathname.substring(1);
     let rightButton;
 
     switch (page) {
@@ -10,6 +13,9 @@ const Navbar = ({ page }) => {
             break;
         case 'about':
             rightButton = <UploadBtnLink />;
+            break;
+        case 'loading':
+            rightButton = <CancelBtnLink />;
             break;
         default:
             rightButton = <AboutBtnLink />;

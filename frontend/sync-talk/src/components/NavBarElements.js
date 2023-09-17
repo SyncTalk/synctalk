@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUpload, faDownload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUpload, faDownload, faInfoCircle, faRectangleXmark } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
@@ -104,4 +104,9 @@ export const AboutBtnLink = () => (
     </NavBtnLink>
 );
 
-
+const CancelIcon = () => <StyledFontAwesomeIcon icon={faRectangleXmark} />;
+export const CancelBtnLink = () => (
+    <NavBtnLink to='/upload'>
+        <CancelIcon />
+    </NavBtnLink>
+);
