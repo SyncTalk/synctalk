@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    /* link page tp loading */
     <div className="App">
       <Router>
         <Navbar />

@@ -1,82 +1,107 @@
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUpload, faDownload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
     background: transparent;
     height: 80px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    align-items: center;
+    padding-top: 2rem;
     z-index: 100;
     position: fixed;
-    width: 100%;
+
+    @media screen and (max-width: 768px) {
+        padding-top: 1rem;
+    }
 `;
 
-export const NavLink = styled(Link)`
-    color: #fff;
+export const NavLeft = styled.div`
     display: flex;
     align-items: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-    cursor: pointer;
-
-    &:hover {
-        color: #000d1a;
-    }
-`;
-
-export const Bars = styled(FaBars)`
-    display: none;
-    color: #fff;
-
+    margin-left: 4rem;
     @media screen and (max-width: 768px) {
-        display: block;
-        /* position: absolute; */
-        top: 0;
-        right: 0;
-        transform: translate(-100%, 75%);
-        font-size: 1.8rem;
-        cursor: pointer;
+        margin-left: 2rem;
     }
 `;
 
-export const NavMenu = styled.div`
-    display: flex;
-    /* align-items: center; */
-    margin-right: -48px;
-
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`;
-
-export const NavBtn = styled.nav`
+export const NavRight = styled.div`
     display: flex;
     align-items: center;
-    /* margin-right: 24px; */
-
+    margin-right: 4rem;
     @media screen and (max-width: 768px) {
-        display: none;
+        margin-right: 2rem;
     }
 `;
 
 export const NavBtnLink = styled(Link)`
-    /* border-radius: 4px; */
-    background: #256ce1;
-    padding: 10px 22px;
-    color: #fff;
+
+    aspect-ratio: 1/1;
+    background: #ffffff;
+    padding: 1rem;
+    color: #457B9D;
     border: none;
+    border-radius: 50%;
     outline: none;
-    /* cursor: pointer; */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
 
-    /* &:hover {
+    &:hover {
         transition: all 0.2s ease-in-out;
-        background: #fff;
-        color: #010606;
-    } */
+        background: #457B9D;
+        color: #ffffff;
+    } 
+
+    @media screen and (max-width: 768px) {
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0.5rem;
+    }
 `;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+    font-size: 2rem;
+    @media screen and (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+`;
+
+const HomeIcon = () => <StyledFontAwesomeIcon icon={faHome} />;
+
+export const HomeBtnLink = () => (
+    <NavBtnLink to='/home'>
+        <HomeIcon />
+    </NavBtnLink>
+);
+
+const UploadIcon = () => <StyledFontAwesomeIcon icon={faUpload} />;
+export const UploadBtnLink = () => (
+    <NavBtnLink to='/loading'>
+        <UploadIcon />
+    </NavBtnLink>
+);
+
+const DownloadIcon = () => <StyledFontAwesomeIcon icon={faDownload} />;
+export const DownloadBtnLink = () => (
+    <NavBtnLink to='/download'>
+        <DownloadIcon />
+    </NavBtnLink>
+);
+
+const AboutIcon = () => <StyledFontAwesomeIcon icon={faInfoCircle} />;
+export const AboutBtnLink = () => (
+    <NavBtnLink to='/about'>
+        <AboutIcon />
+    </NavBtnLink>
+);
+
 
