@@ -64,57 +64,42 @@
     gap: 0.5rem;
 }
 
-.SpeedControl input[type="range"] {
-    -webkit-appearance: none;
-    height: 0.5rem;
-    background-color: #ddd;
-    border-radius: 0.25rem;
-    outline: none;
-}
-
-.SpeedControl input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 1.2rem;
-    height: 1.2rem;
-    background-color: #ffffff; /* changed background color */
-    border-radius: 50%;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-}
-
-.SpeedControl input[type="range"]::-webkit-progress-value {
-    background-color: #457B9D; /* changed background color */
-}
-
 .VolumeControl {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.VolumeControl input[type="range"] {
+input[type=range] {
     -webkit-appearance: none;
-    height: 0.5rem;
+    appearance: none;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    overflow: hidden;
+    height: 0.7rem;
     background-color: #ddd;
     border-radius: 0.25rem;
     outline: none;
 }
 
-.VolumeControl input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 1.2rem;
-    height: 1.2rem;
-    background-color: #ffffff; /* changed background color */
+    width:0.7rem;
+    height: 0.7rem;
+    color: #ffffff;
+    background-color: #ffffff;
     border-radius: 50%;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    box-shadow:  -2px 1px 20px #000000, calc(-100vw - 7px) 0 0 100vw #457B9D;
     cursor: pointer;
 }
 
-.VolumeControl input[type="range"]::-webkit-progress-bar {
-    background-color: #ddd; /* changed background color */
-    border-radius: 0.25rem;
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.4); /* added hover animation */
 }
 
-.VolumeControl input[type="range"]::-webkit-progress-value {
-    background-color: #457B9D; /* changed background color */
-}
