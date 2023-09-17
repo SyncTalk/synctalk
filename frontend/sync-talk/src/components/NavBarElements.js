@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import styled from 'styled-components';
-import { menuData } from '../data/MenuData';
-import { Button } from './Button';
-
 
 export const Nav = styled.nav`
     background: transparent;
