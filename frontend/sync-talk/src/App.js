@@ -1,17 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Loading from './pages/loading';
-import Navbar from './components/Navbar';
+// Qingyue Zhu
+import React from 'react';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/loading" element={<Loading />} />
-        </Routes>
-      </Router>
+    <div>
+      <header>Header</header>
+      <AppRouter />
+      <footer>Footer</footer>
     </div>
   );
 }
