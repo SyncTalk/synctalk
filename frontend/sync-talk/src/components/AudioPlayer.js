@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,15 @@ const AudioPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+
+    useEffect(() => {
+        const audio = document.getElementById('audio');
+        audio.load();
+        setCurrentTime(audio.currentTime);
+        audio.addEventListener('loadedmetadata', () => {
+          setDuration(audio.duration);
+        });
+      }, []);
 
     const handlePlayPause = () => {
         const audio = document.getElementById('audio');
@@ -38,12 +47,6 @@ const AudioPlayer = () => {
         setDuration(audio.duration);
     };
 
-    const handleSeek = (event) => {
-        const audio = document.getElementById('audio');
-        const seekTime = (event.nativeEvent.offsetX / event.target.offsetWidth) * audio.duration;
-        audio.currentTime = seekTime;
-    };
-
     return (
         <div className="AudioPlayer">
             <audio
@@ -66,7 +69,7 @@ const AudioPlayer = () => {
                             <FontAwesomeIcon icon={faForward} />
                         </button>
                     </div>
-                    <ProgressBar/>
+                    <ProgressBar currentTime={currentTime} duration={duration} />
                 </div>
                 <VolumeControl />
             </div>

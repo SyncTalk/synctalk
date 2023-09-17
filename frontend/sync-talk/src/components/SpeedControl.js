@@ -18,7 +18,7 @@ const SpeedControl = () => {
                 <FontAwesomeIcon icon={faTachometerAlt} />
             </label>
             <input type="range" id="speed" name="speed" min="0.25" max="2.00" step="0.25" value={speed} onChange={handleSpeedChange} />
-            <span>{speed.toFixed(2)}x</span>
+            <span>{speed.toFixed(2)}</span>
         </div>
     );
 };

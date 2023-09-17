@@ -1,13 +1,27 @@
-const ProgressBar = ({ now, label }) => {
+const ProgressBar = ({ currentTime, duration }) => {
+
+    const handleSeek = (event) => {
+        const audio = document.getElementById('audio');
+        const seekTime = (event.nativeEvent.offsetX / event.target.offsetWidth) * audio.duration;
+        audio.currentTime = seekTime;
+    };
+
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
     return (
-        <div className="relative pt-1">
-            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                <div style={{ width: `${now}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-            </div>
-            <div className="flex justify-between text-xs">
-                <div>{label}</div>
-                <div>{now}%</div>
-            </div>
+        <div className="ProgressBar">
+            <span>{formatTime(currentTime)}</span>
+            <progress
+                    className="Progress"
+                    value={currentTime}
+                    max={duration}
+                    onClick={handleSeek}
+            />
+            <span>{formatTime(duration)}</span>
         </div>
     );
 };
