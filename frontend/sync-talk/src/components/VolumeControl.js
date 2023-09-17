@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 
 const VolumeControl = () => {
     const [volume, setVolume] = useState(1);
@@ -12,7 +14,9 @@ const VolumeControl = () => {
 
     return (
         <div className="VolumeControl">
-            <label htmlFor="volume">Volume:</label>
+            <label htmlFor="volume">
+                <FontAwesomeIcon icon={faVolumeUp} />
+            </label>
             <input
                 type="range"
                 id="volume"

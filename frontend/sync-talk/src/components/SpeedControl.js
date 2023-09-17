@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const SpeedControl = () => {
     const [speed, setSpeed] = useState(1);
@@ -7,20 +9,16 @@ const SpeedControl = () => {
         const audio = document.getElementById('audio');
         const speed = event.target.value;
         audio.playbackRate = speed;
-        setSpeed(speed);
+        setSpeed(Number(speed));
     };
 
     return (
         <div className="SpeedControl">
-            <label htmlFor="speed">Speed:</label>
-            <select id="speed" name="speed" value={speed} onChange={handleSpeedChange}>
-                <option value="0.5">0.5x</option>
-                <option value="0.75">0.75x</option>
-                <option value="1">1x</option>
-                <option value="1.25">1.25x</option>
-                <option value="1.5">1.5x</option>
-                <option value="2">2x</option>
-            </select>
+            <label htmlFor="speed">
+                <FontAwesomeIcon icon={faTachometerAlt} />
+            </label>
+            <input type="range" id="speed" name="speed" min="0.25" max="2.00" step="0.25" value={speed} onChange={handleSpeedChange} />
+            <span>{speed.toFixed(2)}x</span>
         </div>
     );
 };

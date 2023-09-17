@@ -1,0 +1,120 @@
+.AudioPlayer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 1rem 2rem;
+    background-color: #f1f1f1;
+}
+
+.AudioPlayer .Controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #457B9D;
+    font-size: 1.6rem;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.2rem;
+    }
+}
+
+.AudioPlayer .Controls .Playback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 50%;
+}
+
+.AudioPlayer .Controls button {
+    background: #457B9D;
+    color: #ffffff;
+    padding: 1.2rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: #ffffff;
+        color: #457B9D;
+    } 
+
+    @media screen and (max-width: 768px) {
+        padding: 0.8rem;
+        font-size: 1.2rem;
+    }
+        
+}
+
+.SpeedControl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.SpeedControl input[type="range"] {
+    -webkit-appearance: none;
+    height: 0.5rem;
+    background-color: #ddd;
+    border-radius: 0.25rem;
+    outline: none;
+}
+
+.SpeedControl input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #ffffff; /* changed background color */
+    border-radius: 50%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.SpeedControl input[type="range"]::-webkit-progress-value {
+    background-color: #457B9D; /* changed background color */
+}
+
+.VolumeControl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.VolumeControl input[type="range"] {
+    -webkit-appearance: none;
+    height: 0.5rem;
+    background-color: #ddd;
+    border-radius: 0.25rem;
+    outline: none;
+}
+
+.VolumeControl input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #ffffff; /* changed background color */
+    border-radius: 50%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.VolumeControl input[type="range"]::-webkit-progress-bar {
+    background-color: #ddd; /* changed background color */
+    border-radius: 0.25rem;
+}
+
+.VolumeControl input[type="range"]::-webkit-progress-value {
+    background-color: #457B9D; /* changed background color */
+}

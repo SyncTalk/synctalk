@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import VolumeControl from './VolumeControl';
+import { ProgressBar } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+import VolumeControl from './VolumeControl.js';
 import SpeedControl from './SpeedControl';
-import ProgressBar from './ProgressBar';
 import './AudioPlayer.css';
 
 const AudioPlayer = () => {
@@ -17,6 +19,16 @@ const AudioPlayer = () => {
             audio.play();
         }
         setIsPlaying(!isPlaying);
+    };
+
+    const handleBack = () => {
+        const audio = document.getElementById('audio');
+        audio.currentTime -= 10;
+    };
+
+    const handleNext = () => {
+        const audio = document.getElementById('audio');
+        audio.currentTime += 10;
     };
 
     const handleTimeUpdate = () => {
@@ -39,12 +51,22 @@ const AudioPlayer = () => {
                 type="audio/mpeg"
                 onTimeUpdate={handleTimeUpdate}
             />
-            <div className="controls">
-                <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
-                <VolumeControl />
+            <div className="Controls">
                 <SpeedControl />
-                <ProgressBar now={(currentTime / duration) * 100} onClick={handleSeek} />
+                <div className="Playback">
+                    <button onClick={handleBack}>
+                        <FontAwesomeIcon icon={faBackward} />
+                    </button>
+                    <button onClick={handlePlayPause}>
+                        {isPlaying ? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}
+                    </button>
+                    <button onClick={handleNext}>
+                        <FontAwesomeIcon icon={faForward} />
+                    </button>
+                </div>
+                <VolumeControl />
             </div>
+            <ProgressBar now={(currentTime / duration) * 100} onClick={handleSeek} />
         </div>
     );
 };
