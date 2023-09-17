@@ -8,10 +8,6 @@ import textData from '../test.json';
 const Result = () => {
     const [currentTime, setCurrentTime] = useState(0);
 
-    const handleTimeUpdate = (time) => {
-        setCurrentTime(time);
-    };
-
     return (
         <div className="Result">
             <div className="Header">
@@ -19,13 +15,13 @@ const Result = () => {
             </div>
             <div className="Body">
                 <div className="TextContainer">
-                    {textData.map(({ time, text }) => (
-                        <TextWithSpeaker key={time} text={text} time={time} />
+                    {textData.map(({ startTime, endTime, text }) => (
+                        <TextWithSpeaker text={text} startTime={startTime} endTime={endTime} />
                     ))}
                 </div>
             </div>
             <div className="Footer">
-                <AudioPlayer onTimeUpdate={handleTimeUpdate} />
+                <AudioPlayer />
             </div>
         </div>
     );

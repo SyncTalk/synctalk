@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 
-const TextWithSpeaker = ({ text, time }) => {
+const TextWithSpeaker = ({ text, startTime, endTime }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
 
     const handleTextClick = () => {
         const audio = document.getElementById('audio');
-        audio.currentTime = time;
-        setCurrentTime(time);
-        audio.play();
+        if (isPlaying && audio.currentTime >= startTime && audio.currentTime < endTime) {
+            audio.pause();
+            setIsPlaying(false);
+        } else {
+            audio.currentTime = startTime;
+            setCurrentTime(startTime);
+            audio.play();
+            setIsPlaying(true);
+        }
     };
 
     useEffect(() => {
@@ -20,12 +26,17 @@ const TextWithSpeaker = ({ text, time }) => {
         };
         audio.addEventListener('timeupdate', handleTimeUpdate);
         setIsPlaying(!audio.paused);
+        const handleEnded = () => {
+            setIsPlaying(false);
+        };
+        audio.addEventListener('ended', handleEnded);
         return () => {
             audio.removeEventListener('timeupdate', handleTimeUpdate);
+            audio.removeEventListener('ended', handleEnded);
         };
     }, []);
 
-    const isCurrent = currentTime >= time && currentTime < time + 10;
+    const isCurrent = currentTime >= startTime && currentTime < endTime;
 
     return (
         <div className="TextWithSpeaker">
