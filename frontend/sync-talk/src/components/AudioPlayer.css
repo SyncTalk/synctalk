@@ -22,6 +22,15 @@
 
 .AudioPlayer .Controls .Playback {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 50%;
+}
+
+.AudioPlayer .Controls .Playback .PlaybackControl {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -31,7 +40,6 @@
 .AudioPlayer .Controls button {
     background: #457B9D;
     color: #ffffff;
-    padding: 1.2rem;
     font-size: 1.6rem;
     border: none;
     border-radius: 50%;
@@ -44,6 +52,8 @@
     align-items: center;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
+    width: 3.5rem; /* added width */
+    height: 3.5rem; /* added height */
 
     &:hover {
         transition: all 0.2s ease-in-out;
@@ -54,8 +64,9 @@
     @media screen and (max-width: 768px) {
         padding: 0.8rem;
         font-size: 1.2rem;
+        width: 2.5rem; /* added width */
+        height: 2.5rem; /* added height */
     }
-        
 }
 
 .SpeedControl {
@@ -86,6 +97,11 @@ input[type=range]::-webkit-slider-runnable-track {
     background-color: #ddd;
     border-radius: 0.25rem;
     outline: none;
+    
+    @media screen and (max-width: 768px) {
+        height: 0.5rem;
+    }
+        
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -97,9 +113,12 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     box-shadow:  -2px 1px 20px #000000, calc(-100vw - 7px) 0 0 100vw #457B9D;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+        height: 0.5rem;
+    }
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
     transform: scale(1.4); /* added hover animation */
 }
-
