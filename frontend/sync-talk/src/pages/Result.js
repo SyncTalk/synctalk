@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import AudioPlayer from '../components/AudioPlayer';
 import TextWithSpeaker from '../components/TextWithSpeaker';
-import Text from '../components/Text';
 import './css/Result.css';
 import textData from '../test.json';
 
 const Result = () => {
     const [currentTime, setCurrentTime] = useState(0);
+
+    const handleTimeUpdate = (time) => {
+        setCurrentTime(time);
+        const lastTextEndTime = textData[textData.length - 1].endTime;
+        if (time >= lastTextEndTime) {
+            const audio = document.getElementById('audio');
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    };
 
     return (
         <div className="Result">
@@ -16,12 +25,12 @@ const Result = () => {
             <div className="Body">
                 <div className="TextContainer">
                     {textData.map(({ startTime, endTime, text }) => (
-                        <TextWithSpeaker text={text} startTime={startTime} endTime={endTime} />
+                        <TextWithSpeaker key={startTime} text={text} startTime={startTime} endTime={endTime} />
                     ))}
                 </div>
             </div>
             <div className="Footer">
-                <AudioPlayer />
+                <AudioPlayer onTimeUpdate={handleTimeUpdate} />
             </div>
         </div>
     );

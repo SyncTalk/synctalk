@@ -17,9 +17,15 @@ const AudioPlayer = () => {
         audio.load();
         setCurrentTime(audio.currentTime);
         audio.addEventListener('loadedmetadata', () => {
-          setDuration(audio.duration);
+            setDuration(audio.duration);
         });
-      }, []);
+        audio.addEventListener('play', () => {
+            setIsPlaying(true);
+        });
+        audio.addEventListener('pause', () => {
+            setIsPlaying(false);
+        });
+    }, []);
 
     const handlePlayPause = () => {
         const audio = document.getElementById('audio');

@@ -5,43 +5,47 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 const TextWithSpeaker = ({ text, startTime, endTime }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    const [isCurrent, setIsCurrent] = useState(false);
 
-    const handleTextClick = () => {
+    const handleAudioClick = () => {
         const audio = document.getElementById('audio');
-        if (isPlaying && audio.currentTime >= startTime && audio.currentTime < endTime) {
-            audio.pause();
-            setIsPlaying(false);
-        } else {
-            audio.currentTime = startTime;
-            setCurrentTime(startTime);
-            audio.play();
-            setIsPlaying(true);
-        }
+        setIsClicked(true);
+        audio.currentTime = startTime;
+        setCurrentTime(startTime);
+        audio.play();
+        setIsPlaying(true);
     };
 
     useEffect(() => {
         const audio = document.getElementById('audio');
         const handleTimeUpdate = () => {
             setCurrentTime(audio.currentTime);
+
+            if (currentTime >= startTime && currentTime < endTime) {
+                setIsCurrent(true);
+            } else {
+                setIsCurrent(false);
+            }
+
+            if (isClicked && audio.currentTime >= endTime) {
+                audio.pause();
+                setIsPlaying(false);
+                setIsClicked(false);
+            }
         };
+
         audio.addEventListener('timeupdate', handleTimeUpdate);
-        setIsPlaying(!audio.paused);
-        const handleEnded = () => {
-            setIsPlaying(false);
-        };
-        audio.addEventListener('ended', handleEnded);
+
         return () => {
             audio.removeEventListener('timeupdate', handleTimeUpdate);
-            audio.removeEventListener('ended', handleEnded);
         };
-    }, []);
-
-    const isCurrent = currentTime >= startTime && currentTime < endTime;
+    }, [currentTime, isClicked, startTime, endTime]);
 
     return (
         <div className="TextWithSpeaker">
             <span className={`Text ${isPlaying && isCurrent ? 'Playing' : ''}`}>{text}</span>
-            <button className="SpeakerButton" onClick={handleTextClick}>
+            <button className="SpeakerButton" onClick={handleAudioClick}>
                 <FontAwesomeIcon icon={faVolumeUp} />
             </button>
         </div>
