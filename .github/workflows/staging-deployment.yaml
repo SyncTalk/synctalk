@@ -88,6 +88,6 @@ jobs:
             # remove old staging web server container
             docker rm staging-web-server
             # create and run new staging web server container from new staging web server image
-            docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server:staging
+            docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server-staging
         timeout-minutes: 1
     timeout-minutes: 10
