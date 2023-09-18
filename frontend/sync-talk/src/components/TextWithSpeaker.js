@@ -34,7 +34,6 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
                 setIsClicked(false);
             }
         };
-
         audio.addEventListener('timeupdate', handleTimeUpdate);
 
         return () => {
@@ -42,9 +41,18 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         };
     }, [currentTime, isClicked, startTime, endTime]);
 
+
+    useEffect(() => {
+        if (currentTime >= startTime && currentTime < endTime) {
+            setIsCurrent(true);
+        } else {
+            setIsCurrent(false);
+        }
+    }, [currentTime, startTime, endTime]);
+
     return (
         <div className="TextWithSpeaker">
-            <span className={`Text ${isPlaying && isCurrent ? 'Playing' : ''}`}>{text}</span>
+            <span className={`Text ${isCurrent ? 'Playing' : ''}`}>{text}</span>
             <button className="SpeakerButton" onClick={handleAudioClick}>
                 <FontAwesomeIcon icon={faVolumeUp} />
             </button>
