@@ -30,6 +30,11 @@ button {
   margin-top: 25px;
 }
 
+.right-button {
+  text-align: right;
+  margin: 35px 168px 40px 0px;
+}
+
 .title {
   margin-bottom: 13px;
   color: #1D3557;
@@ -37,19 +42,6 @@ button {
   text-align: center;
 }
 
-.instruction {
-  margin-left: 100px;
-  margin-right: 100px;
-}
-
-.instruction span {
-  font-weight: bold;
-}
-
 .icon {
   text-align: center;
-}
-
-.about-icon {
-  height: 350px;
 }
