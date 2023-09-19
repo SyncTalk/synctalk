@@ -1,4 +1,4 @@
-name: staging-deployment
+name: staging
 
 on:
   push:
@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-formatting:
-    uses: ./.github/workflows/formatting.yaml
+  development-frontend:
+    uses: ./.github/workflows/development-frontend.yaml
 
-  deploy-frontend:
+  staging:
     runs-on: ubuntu-22.04
     steps:
       - name: sparse checkout frontend directory
