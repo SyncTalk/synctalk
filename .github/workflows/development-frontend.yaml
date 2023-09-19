@@ -1,7 +1,11 @@
 name: development-frontend
 
 on:
+  push:
+    branches:
+      - development-frontend
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   development_frontend:
@@ -33,7 +37,7 @@ jobs:
           cache: npm
         timeout-minutes: 1
 
-      - id: setup-node-modules-cache
+      - id: setup_node_modules_cache
         name: setup node_modules cache
         uses: actions/cache@v3
         with:
@@ -41,7 +45,7 @@ jobs:
           key: node-modules-${{ hashFiles('package-lock.json') }}
         timeout-minutes: 1
 
-      - if: ${{ steps.setup-node-modules-cache.outputs.cache-hit != 'true' }}
+      - if: ${{ steps.setup_node_modules_cache.outputs.cache-hit != 'true' }}
         name: clean install dependencies
         run: npm clean-install
         timeout-minutes: 5
