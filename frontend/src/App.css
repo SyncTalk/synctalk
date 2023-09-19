@@ -1,38 +1,47 @@
-.App {
+/* Qingyue Zhu global css */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  font-size: 18px;
+  font-family: 'Roboto';
+}
+
+.nav-bar {
+  margin: 27px 31px;
+  background-color: #f2f2f2;
+}
+
+button {
+  width: 240px;
+  height: 60px;
+  background-color: #457B9D;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+
+.center-button {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.right-button {
+  text-align: right;
+  margin: 35px 168px 40px 0px;
+}
+
+.title {
+  margin-bottom: 13px;
+  color: #1D3557;
+  font-size: 76px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.icon {
+  text-align: center;
 }
