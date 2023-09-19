@@ -77,14 +77,14 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 const HomeIcon = () => <StyledFontAwesomeIcon icon={faHome} />;
 
 export const HomeBtnLink = () => (
-    <NavBtnLink to='/home'>
+    <NavBtnLink to='/'>
         <HomeIcon />
     </NavBtnLink>
 );
 
 const UploadIcon = () => <StyledFontAwesomeIcon icon={faUpload} />;
 export const UploadBtnLink = () => (
-    <NavBtnLink to='/loading'>
+    <NavBtnLink to='/upload'>
         <UploadIcon />
     </NavBtnLink>
 );
