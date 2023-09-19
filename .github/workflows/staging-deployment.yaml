@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-formatting:
-    uses: .github/workflows/formatting.yaml
+    uses: ./.github/workflows/formatting.yaml
 
   deploy-frontend:
     runs-on: ubuntu-22.04
@@ -94,4 +94,3 @@ jobs:
             docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server
         timeout-minutes: 1
     timeout-minutes: 10
-    
