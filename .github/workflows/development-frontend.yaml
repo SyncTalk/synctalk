@@ -49,3 +49,7 @@ jobs:
       - name: check formatting
         run: npx prettier --check .
         timeout-minutes: 1
+
+      - name: lint
+        run: npx eslint .
+        timeout-minutes: 1
