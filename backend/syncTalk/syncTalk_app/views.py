@@ -7,6 +7,7 @@ from .serializers import UploadSerializer
 from rest_framework.viewsets import ViewSet
 from django.conf import settings
 from .functions import splitTextIntoSentences
+from .speechToText import getTimestamps
 import os
 
 # Create your views here.
@@ -27,6 +28,7 @@ class FileUploadView(APIView):
                 with open(os.path.join(settings.MEDIA_ROOT, audio_file.name), 'wb') as destination:
                     for chunk in audio_file.chunks():
                         destination.write(chunk)
+                getTimestamps(os.path.join(settings.MEDIA_ROOT, audio_file.name))
 
             #save the text file
             if text_file:
