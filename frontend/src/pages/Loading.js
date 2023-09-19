@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactLoading from 'react-loading';
 import './css/Loading.css';
 
@@ -26,7 +26,7 @@ const Loading = () => {
 
     return (
         <div className="Loading" >
-            <img className="Infographic" src={url} />
+            <img className="Infographic" src={url} alt="cat"/>
             <div className="Title">
                 <p>Generating</p>
                 <ReactLoading type="bubbles" color="#1D3557" height={10} width={200} />

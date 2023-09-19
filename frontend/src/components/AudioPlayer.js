@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faBackward, faForward, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
 import VolumeControl from './VolumeControl.js';
 import SpeedControl from './SpeedControl';
 import './AudioPlayer.css';
