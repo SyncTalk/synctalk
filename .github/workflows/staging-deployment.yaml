@@ -91,3 +91,4 @@ jobs:
             docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server
         timeout-minutes: 1
     timeout-minutes: 10
+    
