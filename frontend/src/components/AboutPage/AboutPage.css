@@ -1,0 +1,12 @@
+.instruction {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  .instruction span {
+    font-weight: bold;
+  }
+
+  .about-icon {
+    height: 350px;
+  }
