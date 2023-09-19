@@ -1,10 +1,11 @@
-name: formatting
+name: development-frontend
 
-on: 
+on:
   workflow_call:
 
 jobs:
-  check-formatting:
+  development_frontend:
+    name: development-frontend
     runs-on: ubuntu-22.04
     steps:
       - name: sparse checkout frontend directory

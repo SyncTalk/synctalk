@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-formatting:
-    uses: ./.github/workflows/formatting.yaml
+    uses: ./.github/workflows/development-frontend.yaml
 
   deploy-frontend:
     runs-on: ubuntu-22.04

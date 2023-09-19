@@ -7,10 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  development-frontend:
+  development_frontend:
+    name: development-frontend
     uses: ./.github/workflows/development-frontend.yaml
 
   staging:
+    name: staging
+    needs: development_frontend
     runs-on: ubuntu-22.04
     steps:
       - name: sparse checkout frontend directory
