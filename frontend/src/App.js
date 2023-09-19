@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar';
-import Home from './components/HomePage/HomePage';
-import Upload from './components/UploadPage/UploadPage';
-import About from './components/AboutPage/AboutPage';
-import Loading from './pages/Loading';
-import Result from './pages/Result';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Home from "./components/HomePage/HomePage";
+import Upload from "./components/UploadPage/UploadPage";
+import About from "./components/AboutPage/AboutPage";
+import Loading from "./pages/Loading";
+import Result from "./pages/Result";
 
 function App() {
   return (

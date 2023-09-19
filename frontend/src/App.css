@@ -2,12 +2,12 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 p {
   font-size: 18px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 .nav-bar {
@@ -18,7 +18,7 @@ p {
 button {
   width: 240px;
   height: 60px;
-  background-color: #457B9D;
+  background-color: #457b9d;
   color: #fff;
   font-size: 18px;
   border: none;
@@ -37,7 +37,7 @@ button {
 
 .title {
   margin-bottom: 13px;
-  color: #1D3557;
+  color: #1d3557;
   font-size: 76px;
   text-align: center;
 }

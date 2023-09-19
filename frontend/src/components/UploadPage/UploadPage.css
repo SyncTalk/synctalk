@@ -1,71 +1,71 @@
 .upload-title {
-    padding-top: 150px;
-    background-color: #f2f2f2;
+  padding-top: 150px;
+  background-color: #f2f2f2;
 }
 
 .subtitle {
-    display: flex;
-    margin-top: 60px;
-    justify-content: center;
-    font-size: 32px;
-    font-weight: bold;
-    color: #1d3557;
+  display: flex;
+  margin-top: 60px;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #1d3557;
 }
 
 .three-part {
-    width: 292px;
-    margin-right: 24px;
-    text-align: center;
+  width: 292px;
+  margin-right: 24px;
+  text-align: center;
 }
 
 .three-part:last-child {
-    margin-right: 0px;
+  margin-right: 0px;
 }
 
 .upload-instrument {
-    margin-top: 43px;
-    display: flex;
-    justify-content: center;
+  margin-top: 43px;
+  display: flex;
+  justify-content: center;
 }
 
 .upload-square {
-    margin-top: 45px;
-    padding-bottom: 18px;
-    display: flex;
-    justify-content: center;
+  margin-top: 45px;
+  padding-bottom: 18px;
+  display: flex;
+  justify-content: center;
 }
 
 .upload-square .three-part {
-    border: 1px dashed rgba(0, 0, 0, 0.25);
-    border-radius: 7.55px;
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+  border-radius: 7.55px;
 }
 
 .upload-square .three-part div {
-    margin-top: 18px;
-    margin-bottom: 18px;
-    font-size: 10px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-size: 10px;
 }
 
 .upload-icon {
-    width: 36px;
-    margin-top: 47px;
+  width: 36px;
+  margin-top: 47px;
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .select-part {
-    text-align: center;
+  text-align: center;
 }
 
 .select-button {
-    width: 67px;
-    height: 27px;
-    display: grid;
-    place-items: center;
-    margin-left: 112px;
-    background-color: #457B9D;
-    border-radius: 4px;
-    color: #fff;
+  width: 67px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  margin-left: 112px;
+  background-color: #457b9d;
+  border-radius: 4px;
+  color: #fff;
 }

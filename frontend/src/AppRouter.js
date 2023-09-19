@@ -1,11 +1,11 @@
 // Qingyue Zhu
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage/HomePage';
-import UploadPage from './components/UploadPage/UploadPage';
-import AboutPage from './components/AboutPage/AboutPage';
-import LoadingPage from './components/LoadingPage/LoadingPage';
-import ResultPage from './components/ResultPage/ResultPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage/HomePage";
+import UploadPage from "./components/UploadPage/UploadPage";
+import AboutPage from "./components/AboutPage/AboutPage";
+import LoadingPage from "./components/LoadingPage/LoadingPage";
+import ResultPage from "./components/ResultPage/ResultPage";
 
 const AppRouter = () => {
   return (
