@@ -19,25 +19,36 @@ class FileUploadView(APIView):
         file_serializer = UploadSerializer(data=request.data)
 
         if file_serializer.is_valid():
+            print("valid file")
             audio_file = file_serializer.validated_data.get('audio')
             text_file = file_serializer.validated_data.get('text')
             translation_file = file_serializer.validated_data.get('translation')
             
+            #TODO: use request id to name files?
+            #create a folder
+            foldername = (text_file.name).split('.')[0]
+            p = os.path.join(settings.MEDIA_ROOT,foldername)
+            if not os.path.exists(p):
+                os.makedirs(p)
+            
             #save the audio file
-            if audio_file:
-                with open(os.path.join(settings.MEDIA_ROOT, audio_file.name), 'wb') as destination:
-                    for chunk in audio_file.chunks():
-                        destination.write(chunk)
-                getTimestamps(os.path.join(settings.MEDIA_ROOT, audio_file.name))
+            audio_path = os.path.join(p,audio_file.name)
+            with open(audio_path, 'wb') as destination:
+                for chunk in audio_file.chunks():
+                    destination.write(chunk)
+            timestamps = getTimestamps(audio_path)
 
             #save the text file
+            text_path = os.path.join(p,text_file.name)
             if text_file:
-                with open(os.path.join(settings.MEDIA_ROOT, text_file.name), 'wb') as destination:
+                with open(text_path, 'wb') as destination:
                     for chunk in text_file.chunks():
                         destination.write(chunk)
-                splitTextIntoSentences(os.path.join(settings.MEDIA_ROOT, text_file.name))
-                
-            return Response({audio_file.name,text_file.name}, status=status.HTTP_200_OK)
+                splitTextIntoSentences(text_path)
+            
+            #TODO: return alinged text
+            #return timestamps from whisper
+            return Response(timestamps, status=status.HTTP_200_OK)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
