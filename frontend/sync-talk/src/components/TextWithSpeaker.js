@@ -40,8 +40,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
             },
             params: {
                 'api-version': '3.0',
-                'from': 'en',
-                'to': ['fr', 'zu']
+                'to': 'en',
             },
             data: [{
                 'text': word
@@ -93,7 +92,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
 
     const handleWordClick = async (word) => {
         // Call an API to get the translation of the word
-        const translation = await getTranslation(word);
+        const translation = "await getTranslation(word)";
 
         // Set the selected word and its translation in the state
         setSelectedWord({ word, translation });
