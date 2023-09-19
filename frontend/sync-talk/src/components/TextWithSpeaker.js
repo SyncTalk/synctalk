@@ -14,8 +14,11 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         setIsClicked(true);
         audio.currentTime = startTime;
         setCurrentTime(startTime);
-        audio.play();
-        setIsPlaying(true);
+
+        if(!isPlaying) {
+            audio.play();
+            setIsPlaying(true);
+        }
     };
 
     async function getTranslation(word) {
@@ -92,7 +95,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
 
     const handleWordClick = async (word) => {
         // Call an API to get the translation of the word
-        const translation = "await getTranslation(word)";
+        const translation = await getTranslation(word);
 
         // Set the selected word and its translation in the state
         setSelectedWord({ word, translation });

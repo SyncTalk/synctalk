@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AudioPlayer from '../components/AudioPlayer';
 import TextWithSpeaker from '../components/TextWithSpeaker';
 import './css/Result.css';
 import textData from '../test.json';
 
 const Result = () => {
-    const [currentTime, setCurrentTime] = useState(0);
 
     const handleTimeUpdate = (time) => {
-        setCurrentTime(time);
         const lastTextEndTime = textData[textData.length - 1].endTime;
         if (time >= lastTextEndTime) {
             const audio = document.getElementById('audio');
