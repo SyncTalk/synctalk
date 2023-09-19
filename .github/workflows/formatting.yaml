@@ -1,0 +1,50 @@
+name: formatting
+
+on: 
+  workflow_call:
+
+jobs:
+  check-formatting:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: sparse checkout frontend directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: frontend
+          sparse-checkout-cone-mode: false
+        timeout-minutes: 1
+
+      - name: move files from frontend directory to current directory
+        run: |
+          shopt -s dotglob
+          mv --verbose frontend/* .
+          shopt -u dotglob
+        timeout-minutes: 1
+
+      - name: remove frontend directory
+        run: rm --recursive --verbose frontend
+        timeout-minutes: 1
+
+      - name: setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+        timeout-minutes: 1
+
+      - id: setup-node-modules-cache
+        name: setup node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+        timeout-minutes: 1
+
+      - if: ${{ steps.setup-node-modules-cache.outputs.cache-hit != 'true' }}
+        name: clean install dependencies
+        run: npm clean-install
+        timeout-minutes: 5
+
+      - name: check formatting
+        run: npx prettier --check .
+        timeout-minutes: 1

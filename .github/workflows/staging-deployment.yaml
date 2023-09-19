@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-formatting:
+    uses: .github/workflows/formatting.yaml
+
   deploy-frontend:
     runs-on: ubuntu-22.04
     steps:
