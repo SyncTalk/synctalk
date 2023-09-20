@@ -72,7 +72,7 @@ jobs:
         run: doctl registry login --expiry-seconds 300
         timeout-minutes: 1
 
-      - name: build and push new staging web server image
+      - name: build and push staging web server image
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -134,13 +134,13 @@ jobs:
         run: doctl registry login --expiry-seconds 300
         timeout-minutes: 1
 
-      - name: build and push new staging backend server image
+      - name: build and push staging backend server image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: registry.digitalocean.com/synctalk/staging-backend-server
-        timeout-minutes: 5
+        timeout-minutes: 10
 
       - name: deploy staging backend server
         uses: appleboy/ssh-action@v1.0.0
