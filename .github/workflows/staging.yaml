@@ -131,7 +131,7 @@ jobs:
         timeout-minutes: 1
 
       - name: login to digitalocean registry
-        run: doctl registry login --expiry-seconds 300
+        run: doctl registry login --expiry-seconds 600
         timeout-minutes: 1
 
       - name: build and push staging backend server image
