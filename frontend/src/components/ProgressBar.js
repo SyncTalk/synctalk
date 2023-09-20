@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from 'prop-types';
+
 const ProgressBar = ({ currentTime, duration }) => {
   const handleSeek = (event) => {
     const audio = document.getElementById("audio");
@@ -24,6 +27,11 @@ const ProgressBar = ({ currentTime, duration }) => {
       <span>{formatTime(duration)}</span>
     </div>
   );
+};
+
+ProgressBar.propTypes = {
+  currentTime: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
 };
 
 export default ProgressBar;

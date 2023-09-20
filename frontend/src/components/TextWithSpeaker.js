@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -117,6 +118,12 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
       </button>
     </div>
   );
+};
+
+TextWithSpeaker.propTypes = {
+  text: PropTypes.string.isRequired,
+  startTime: PropTypes.number.isRequired,
+  endTime: PropTypes.number.isRequired,
 };
 
 export default TextWithSpeaker;
