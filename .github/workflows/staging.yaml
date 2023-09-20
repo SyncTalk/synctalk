@@ -77,7 +77,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: registry.digitalocean.com/synctalk/staging-web-server
+          tags: registry.digitalocean.com/synctalk/staging-web-server:latest
         timeout-minutes: 5
 
       - name: deploy staging web server
@@ -88,14 +88,14 @@ jobs:
           key: ${{ secrets.STAGING_WEB_SERVER_KEY }}
           script: |
             # pull new staging web server image
-            docker pull registry.digitalocean.com/synctalk/staging-web-server
+            docker pull registry.digitalocean.com/synctalk/staging-web-server:latest
             # stop old staging web server container
             docker stop staging-web-server
             # remove old staging web server container
             docker rm staging-web-server
             # create and run new staging web server container from new staging web server image
-            docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server
-        timeout-minutes: 1
+            docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server:latest
+        timeout-minutes: 5
     timeout-minutes: 10
 
   staging_backend:
@@ -135,7 +135,7 @@ jobs:
         timeout-minutes: 10
 
       - name: push staging backend server image
-        run: docker push registry.digitalocean.com/synctalk/staging-backend-server
+        run: docker push registry.digitalocean.com/synctalk/staging-backend-server:latest
         timeout-minutes: 20
 
       - name: deploy staging backend server
@@ -146,12 +146,12 @@ jobs:
           key: ${{ secrets.STAGING_BACKEND_SERVER_KEY }}
           script: |
             # pull new staging backend server image
-            docker pull registry.digitalocean.com/synctalk/staging-backend-server
+            docker pull registry.digitalocean.com/synctalk/staging-backend-server:latest
             # stop old staging backend server container
             docker stop staging-backend-server
             # remove old staging backend server container
             docker rm staging-backend-server
             # create and run new staging backend server container from new staging backend server image
-            docker run -detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server
+            docker run -detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server:latest
         timeout-minutes: 20
     timeout-minutes: 30
