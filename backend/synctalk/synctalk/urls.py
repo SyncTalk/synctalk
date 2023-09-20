@@ -1,5 +1,5 @@
 """
-URL configuration for syncTalk project.
+URL configuration for synctalk project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('upload/', include("syncTalk_app.urls"), name='syncTalk_app')
+    path('upload/', include("synctalk_app.urls"), name='synctalk_app')
 ]
