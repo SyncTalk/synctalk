@@ -22,8 +22,8 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     }
   };
 
+  /*
   async function getTranslation(word) {
-    const axios = require("axios").default;
     const { v4: uuidv4 } = require("uuid");
     const apiKey = "6e712e735c384f7a99f0055f2ce90fce";
     const location = "australiaeast"; // e.g., 'eastus' or 'westus'
@@ -59,6 +59,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
       console.error("Error translating text:", error);
     }
   }
+  */
 
   useEffect(() => {
     const audio = document.getElementById("audio");
@@ -94,7 +95,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
 
   const handleWordClick = async (word) => {
     // Call an API to get the translation of the word
-    const translation = await getTranslation(word);
+    const translation = "await getTranslation(word)";
 
     // Set the selected word and its translation in the state
     setSelectedWord({ word, translation });
