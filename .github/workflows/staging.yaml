@@ -153,5 +153,5 @@ jobs:
             docker rm staging-backend-server
             # create and run new staging backend server container from new staging backend server image
             docker run -detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server
-        timeout-minutes: 1
-    timeout-minutes: 15
+        timeout-minutes: 10
+    timeout-minutes: 20
