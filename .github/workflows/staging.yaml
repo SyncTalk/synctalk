@@ -136,7 +136,7 @@ jobs:
 
       - name: push staging backend server image
         run: docker push registry.digitalocean.com/synctalk/staging-backend-server
-        timeout-minutes: 10
+        timeout-minutes: 20
 
       - name: deploy staging backend server
         uses: appleboy/ssh-action@v1.0.0
@@ -153,5 +153,5 @@ jobs:
             docker rm staging-backend-server
             # create and run new staging backend server container from new staging backend server image
             docker run -detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server
-        timeout-minutes: 10
-    timeout-minutes: 20
+        timeout-minutes: 20
+    timeout-minutes: 30
