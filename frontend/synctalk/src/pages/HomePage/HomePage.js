@@ -2,11 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../HomePage/HomePage.css";
+import introVideo from "../../assets/introVideo.mp4";
 import soundEn from "../../assets/voice-en.m4a"; // Import the English audio in M4A format
 import soundFr from "../../assets/voice-fr.m4a"; // Import the French audio in M4A format
 import soundZh from "../../assets/voice-zh.m4a"; // Import the Chinese audio in M4A format
 import soundImage from "../../assets/sound.jpg";
-import introVideo from "../../assets/introVideo.mp4";
 
 const HomePage = () => {
   // Function to play the corresponding audio

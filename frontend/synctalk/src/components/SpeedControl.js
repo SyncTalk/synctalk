@@ -13,7 +13,7 @@ const SpeedControl = () => {
   };
 
   return (
-    <div className="SpeedControl">
+    <div className="speed-control">
       <label htmlFor="speed">
         <FontAwesomeIcon icon={faTachometerAlt} />
       </label>
