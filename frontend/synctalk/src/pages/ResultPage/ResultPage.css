@@ -1,4 +1,4 @@
-.Result {
+.result {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.Result .Header {
+.result .header {
   width: 100%;
   height: 12%;
   display: flex;
@@ -17,7 +17,7 @@
   color: #1d3557;
 }
 
-.Result .Body {
+.result .body {
   width: 100%;
   height: 80%;
   margin-top: 3vh;
@@ -28,15 +28,15 @@
   align-items: left;
 }
 
-.Result .Body .TextWithSpeaker {
+.result .body .text-with-speaker {
   font-size: 1.2rem;
   color: #1d3557;
 }
 
-.Result .Body .TextWithSpeaker .Playing {
+.result .body .text-with-speaker .playing {
   color: #e63946;
 }
-.Result .Footer {
+.result .footer {
   width: 100%;
   height: 10%;
   display: flex;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "./ProgressBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -7,8 +6,9 @@ import {
   faBackward,
   faForward,
 } from "@fortawesome/free-solid-svg-icons";
-import VolumeControl from "./VolumeControl.js";
-import SpeedControl from "./SpeedControl";
+import ProgressBar from "../ProgressBar";
+import SpeedControl from "../SpeedControl";
+import VolumeControl from "../VolumeControl.js";
 import "./AudioPlayer.css";
 
 const AudioPlayer = () => {
@@ -59,17 +59,17 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div className="AudioPlayer">
+    <div className="audio-player">
       <audio
         id="audio"
         src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         type="audio/mpeg"
         onTimeUpdate={handleTimeUpdate}
       />
-      <div className="Controls">
+      <div className="controls">
         <SpeedControl />
-        <div className="Playback">
-          <div className="PlaybackControl">
+        <div className="playback">
+          <div className="playback-control">
             <button onClick={handleBack}>
               <FontAwesomeIcon icon={faBackward} />
             </button>

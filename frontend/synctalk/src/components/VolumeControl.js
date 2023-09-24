@@ -13,7 +13,7 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="VolumeControl">
+    <div className="volume-control">
       <label htmlFor="volume">
         <FontAwesomeIcon icon={faVolumeUp} />
       </label>

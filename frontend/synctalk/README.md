@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# SyncTalk
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [SyncTalk](#synctalk)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Local Machines](#local-machines)
+      - [Prerequisites](#prerequisites)
+      - [Installation](#installation)
+    - [Server](#server)
+    - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+SyncTalk is a web application that allows users to upload audio, original text, and translations. It automatically aligns these components and presents the aligned content to help users learn a new language.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Audio and Text Upload**: Users can upload audio files, original text, and translations.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Automatic Alignment**: The platform automatically aligns audio with the corresponding text and translations.
 
-### `npm test`
+- **Language Learning**: Users can listen to the audio while reading the original text and its translation, facilitating language learning.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Local Machines
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before you begin, ensure you have met the following requirements:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/) installed
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) package manager
 
-### `npm run eject`
+#### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone the repository to your local machine:
+   ```git clone https://github.com/username/synctalk.git```
+2. Navigate to the project directory:
+    Unix: ```cd frontend/synctalk```
+    Windows: ```cd frontend\synctalk```
+3. Install dependencies:
+    ```npm install``` or ```yarn install```
+4. Start the application:
+    ```npm start``` or ```yarn start```
+5. Access the application in your web browser at http://localhost:3000.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The server is hosted on DigitalOcean at http://synctalk.tech.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Usage
 
-## Learn More
+1. Go to the Upload page by clicking on the "Get Started" Button.
+2. Upload an audio file, original text, and an optional translation.
+3. Click on the "Generate" button.
+4. Browse the aligned content, by scrolling through the page and clicking on the "Play" button and Speaker Icon to listen to the audio.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you would like to contribute to this project, please follow these guidelines:
 
-### Code Splitting
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive commit messages.
+4. Push your changes to your fork.
+5. Submit a pull request to the original repository.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).

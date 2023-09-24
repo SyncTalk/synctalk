@@ -16,10 +16,10 @@ const ProgressBar = ({ currentTime, duration }) => {
   }
 
   return (
-    <div className="ProgressBar">
+    <div className="progress-bar">
       <span>{formatTime(currentTime)}</span>
       <progress
-        className="Progress"
+        className="progress"
         value={currentTime}
         max={duration}
         onClick={handleSeek}

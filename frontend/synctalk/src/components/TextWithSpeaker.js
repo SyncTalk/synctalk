@@ -102,8 +102,8 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
   };
 
   return (
-    <div className="TextWithSpeaker">
-      <span className={`Text ${isCurrent ? "Playing" : ""}`}>
+    <div className="text-with-speaker">
+      <span className={`text ${isCurrent ? "playing" : ""}`}>
         {text.split(" ").map((word, index) => (
           <span
             key={index}
@@ -114,7 +114,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
           </span>
         ))}
       </span>
-      <button className="SpeakerButton" onClick={handleAudioClick}>
+      <button className="speaker-button" onClick={handleAudioClick}>
         <FontAwesomeIcon icon={faVolumeUp} />
       </button>
     </div>
