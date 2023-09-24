@@ -20,5 +20,5 @@ Warren Ang [ang.warrenn@gmail.com](mailto:ang.warrenn@gmail.com"mailto:ang.warre
 
 ### Documentation
 
-[Frontend Documentation](backend/synctalk/README.md)<br/>
-[Backend Documentation](frontend/synctalk/README.md)
+[Frontend Documentation](frontend/synctalk/README.md)<br/>
+[Backend Documentation](backend/synctalk/README.md)
