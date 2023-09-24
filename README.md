@@ -18,10 +18,7 @@ Jessica Zhu [qingyue2@student.unimelb.edu.au](mailto:qingyue2@student.unimelb.ed
 
 Warren Ang [ang.warrenn@gmail.com](mailto:ang.warrenn@gmail.com"mailto:ang.warrenn@gmail.com")
 
-### Frontend Documentation
+### Documentation
 
-[a relative link](backend/synctalk/README.md)
-
-### Backend Documentation
-
-[a relative link](frontend/synctalk/README.md)
+[Frontend Documentation](backend/synctalk/README.md)<br/>
+[Backend Documentation](frontend/synctalk/README.md)
