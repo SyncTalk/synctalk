@@ -1,8 +1,8 @@
 import React from "react";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import TextWithSpeaker from "../../components/TextWithSpeaker";
-import "./ResultPage.css";
 import textData from "../../test.json";
+import "./ResultPage.css";
 
 const Result = () => {
   const handleTimeUpdate = (time) => {
@@ -15,12 +15,12 @@ const Result = () => {
   };
 
   return (
-    <div className="Result">
-      <div className="Header">
+    <div className="result">
+      <div className="header">
         <h1>Result Page</h1>
       </div>
-      <div className="Body">
-        <div className="TextContainer">
+      <div className="body">
+        <div className="text-container">
           {textData.map(({ startTime, endTime, text }) => (
             <TextWithSpeaker
               key={startTime}
@@ -31,7 +31,7 @@ const Result = () => {
           ))}
         </div>
       </div>
-      <div className="Footer">
+      <div className="footer">
         <AudioPlayer onTimeUpdate={handleTimeUpdate} />
       </div>
     </div>

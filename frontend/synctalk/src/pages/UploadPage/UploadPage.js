@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../UploadPage/UploadPage.css";
 import uploadIcon from "../../assets/upload-icon.jpg";
+import "../UploadPage/UploadPage.css";
 
 const UploadPage = () => {
   const [selectedMp3Mp4File, setSelectedMp3Mp4File] = useState(null);

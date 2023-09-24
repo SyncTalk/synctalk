@@ -1,4 +1,4 @@
-.AudioPlayer {
+.audio-player {
   display: flex;
   align-items: center;
   width: 100%;
@@ -7,7 +7,7 @@
   background-color: #f1f1f1;
 }
 
-.AudioPlayer .Controls {
+.audio-player .controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,7 +20,7 @@
   }
 }
 
-.AudioPlayer .Controls .Playback {
+.audio-player .controls .playback {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@
   width: 50%;
 }
 
-.AudioPlayer .Controls .Playback .PlaybackControl {
+.audio-player .controls .playback .playback-control {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
   width: 50%;
 }
 
-.AudioPlayer .Controls button {
+.audio-player .controls button {
   background: #457b9d;
   color: #ffffff;
   font-size: 1.6rem;
@@ -52,8 +52,8 @@
   align-items: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  width: 3.3rem; /* added width */
-  height: 3.3rem; /* added height */
+  width: 3.3rem; 
+  height: 3.3rem; 
 
   &:hover {
     transition: all 0.2s ease-in-out;
@@ -69,24 +69,23 @@
   }
 }
 
-.TextWithSpeaker button {
+.text-with-speaker .speaker-button {
   color: #457b9d;
   background-color: transparent;
   font-size: 1rem;
   border: none;
   border-radius: 50%;
   outline: none;
-  text-align: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-
+  display: flex;
   &:hover {
     transition: all 0.2s ease-in-out;
     color: #e63946;
   }
 }
 
-.SpeedControl {
+.speed-control {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -98,7 +97,7 @@
   }
 }
 
-.VolumeControl {
+.volume-control {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -167,7 +166,7 @@ input[type="range"]::-moz-range-track {
   }
 }
 
-.ProgressBar {
+.progress-bar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +178,7 @@ input[type="range"]::-moz-range-track {
   font-size: 1.2rem;
 }
 
-.ProgressBar .Progress {
+.progress-bar .progress {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -188,32 +187,32 @@ input[type="range"]::-moz-range-track {
   outline: none;
 }
 
-.ProgressBar .Progress::-webkit-progress-bar {
+.progress-bar .progress::-webkit-progress-bar {
   background-color: #ddd;
   border-radius: 1rem;
 }
 
-.ProgressBar .Progress::-webkit-progress-value {
+.progress-bar .progress::-webkit-progress-value {
   background-color: #457b9d;
   border-radius: 1rem;
 }
 
-.ProgressBar .Progress::-moz-progress-bar {
+.progress-bar .progress::-moz-progress-bar {
   background-color: #457b9d;
   border-radius: 1rem;
 }
 
-.ProgressBar .Progress::-ms-fill {
+.progress-bar .progress::-ms-fill {
   background-color: #457b9d;
   border-radius: 1rem;
 }
 
-.ProgressBar .Progress::-ms-fill-lower {
+.progress-bar .progress::-ms-fill-lower {
   background-color: #457b9d;
   border-radius: 1rem;
 }
 
-.ProgressBar .Progress::-ms-fill-upper {
+.progress-bar .progress::-ms-fill-upper {
   background-color: #457b9d;
   border-radius: 1rem;
 }
