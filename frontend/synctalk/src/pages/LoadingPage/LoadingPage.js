@@ -28,9 +28,9 @@ const Loading = () => {
   }, 5000);
 
   return (
-    <div className="Loading">
-      <img className="Infographic" src={url} alt="cat" />
-      <div className="Title">
+    <div className="loading">
+      <img className="infographic" src={url} alt="cat" />
+      <div className="title">
         <p>Generating</p>
         <ReactLoading type="bubbles" color="#1D3557" height={10} width={200} />
       </div>
