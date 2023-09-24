@@ -1,8 +1,8 @@
 import React from "react";
-import AudioPlayer from "../components/AudioPlayer";
-import TextWithSpeaker from "../components/TextWithSpeaker";
-import "./css/Result.css";
-import textData from "../test.json";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import TextWithSpeaker from "../../components/TextWithSpeaker";
+import "./ResultPage.css";
+import textData from "../../test.json";
 
 const Result = () => {
   const handleTimeUpdate = (time) => {

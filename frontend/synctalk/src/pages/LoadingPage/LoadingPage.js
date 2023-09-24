@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactLoading from "react-loading";
-import "./css/Loading.css";
+import "./LoadingPage.css";
 
 const Loading = () => {
   const [url, setUrl] = useState("");
