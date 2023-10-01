@@ -6,7 +6,7 @@ import docx
 
 from django.conf import settings
 
-punctuaction = ['.',',',';',':','?']
+punctuaction = ['.',';','?','!']
 """break a block of text on up on punctuation and add these to a dictionary of sentences and write to a text file
 where ach line corresponds to broken piece of text by puntuation. Return any left over strings from block to be 
 processed seperately or returned to this function"""
