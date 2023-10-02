@@ -31,20 +31,21 @@ class FileUploadView(APIView):
             if not os.path.exists(p):
                 os.makedirs(p)
             
-            #save the audio file
-            audio_path = os.path.join(p,audio_file.name)
-            with open(audio_path, 'wb') as destination:
-                for chunk in audio_file.chunks():
-                    destination.write(chunk)
-            timestamps = getTimestamps(audio_path)
-
             #save the text file
             text_path = os.path.join(p,text_file.name)
             if text_file:
                 with open(text_path, 'wb') as destination:
                     for chunk in text_file.chunks():
                         destination.write(chunk)
-                splitTextIntoSentences(text_path)
+                split_text_path = splitTextIntoSentences(text_path)
+
+            #save the audio file
+            audio_path = os.path.join(p,audio_file.name)
+            with open(audio_path, 'wb') as destination:
+                for chunk in audio_file.chunks():
+                    destination.write(chunk)
+            timestamps = getTimestamps(audio_path, split_text_path)
+
             
             #TODO: return alinged text
             #return timestamps from whisper

@@ -6,7 +6,8 @@ import docx
 
 from django.conf import settings
 
-punctuaction = ['.',';','?','!']
+punctuaction = ['.',';','?','!', ':']
+right_side_enders = ['”','>','}',']',')']
 """break a block of text on up on punctuation and add these to a dictionary of sentences and write to a text file
 where ach line corresponds to broken piece of text by puntuation. Return any left over strings from block to be 
 processed seperately or returned to this function"""
@@ -15,24 +16,27 @@ def blockStringSplit(block, sentenceDict,strSentence, sentenceLines):
     sentence = strSentence[0]
     strByChar = ''
     length = len(str)
-    for index in range(length):
+    index = 0
+    while index < length:
         char = str[index]
-        if (char == '\n' ):
+        #remove newline or tab characters as we will place the newline characters ourselves and no longer need tab for formatting
+        if (char == '\n' or char == '\t'):
             strByChar += ''
         else:
             strByChar += char
+        #characters in puctuation list determine when we have reached the end of a sentence
         if (char in punctuaction):
-            if (index < (length - 1)):
-                if(str[index+1] == ' ' or str[index+1] == '\n'):
-                    sentenceDict[sentence] = strByChar
-                    sentenceLines.write(strByChar + '\n')
-                    strByChar = ''
-                    sentence += 1
-            else:
-                sentenceDict[sentence] = strByChar
-                sentenceLines.write(strByChar + '\n')
-                strByChar = ''
-                sentence += 1
+            #checking if current sentence is inside brackets or quotation. If it is add that puntuation to end of sentence and skip to next 
+            #index so that the next index is not added again to next sentence
+            if (index < length - 1):
+                if (str[index + 1] in right_side_enders):
+                    strByChar += str[index + 1]
+                    index += 1
+            sentenceDict[sentence] = strByChar
+            sentenceLines.write(strByChar + '\n')
+            strByChar = ''
+            sentence += 1
+        index += 1
     str = strByChar
     return [sentence,str]
 
@@ -43,9 +47,10 @@ def splitTextIntoSentences(file_path):
     extension = file_path.split('.')[1]
     strSentence = [1, '']
     sentenceDict = {}
-    with open(os.path.join(settings.MEDIA_ROOT, 'text.json'), 'w') as destination, open(os.path.join(settings.MEDIA_ROOT, 'text.txt'), 'w') as sentenceLines:
+    with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.json'), 'w') as destination, 
+          open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as sentenceLines):
         if(extension == 'txt'):
-                file = open(file_path, 'r')
+                file = open(file_path, 'r', encoding= "utf-8")
                 for line in file:
                     strSentence = blockStringSplit(line, sentenceDict, strSentence,sentenceLines)
                 if(strSentence[1]) :
@@ -77,5 +82,5 @@ def splitTextIntoSentences(file_path):
         json.dump(sentenceDict, destination)
         destination.close()
         sentenceLines.close()
-    return
+    return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
 
