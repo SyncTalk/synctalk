@@ -30,7 +30,7 @@ class FileUploadView(APIView):
             p = os.path.join(settings.MEDIA_ROOT,foldername)
             if not os.path.exists(p):
                 os.makedirs(p)
-            
+
             #save the text file
             text_path = os.path.join(p,text_file.name)
             if text_file:
@@ -44,12 +44,12 @@ class FileUploadView(APIView):
             with open(audio_path, 'wb') as destination:
                 for chunk in audio_file.chunks():
                     destination.write(chunk)
-            # timestamps = getTimestamps(audio_path, split_text_path)
+            timestamps = getTimestamps(audio_path, split_text_path)
 
             
             #TODO: return alinged text
             #return timestamps from whisper
-            return Response({"status":"ok"}, status=status.HTTP_200_OK)
+            return Response(timestamps, status=status.HTTP_200_OK)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
