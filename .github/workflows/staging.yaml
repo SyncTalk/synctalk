@@ -150,7 +150,7 @@ jobs:
             # remove old staging backend server container
             docker rm staging-backend-server
             # create and run new staging backend server container from new staging backend server image
-            docker run -it --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server:latest
+            docker run --detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server:latest
             # remove unused images
             docker image prune --force
         timeout-minutes: 20
