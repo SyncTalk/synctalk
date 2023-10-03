@@ -131,7 +131,7 @@ jobs:
         timeout-minutes: 1
 
       - name: build staging backend server image
-        run: docker build --tag registry.digitalocean.com/synctalk/staging-backend-server .
+        run: docker build --tag registry.digitalocean.com/synctalk/staging-backend-server:latest .
         timeout-minutes: 10
 
       - name: push staging backend server image
