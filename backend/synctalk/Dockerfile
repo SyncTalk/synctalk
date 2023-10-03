@@ -1,6 +1,6 @@
 FROM python:3.10
 
-RUN apt-get install ffmpeg
+RUN apt update && apt upgrade --yes && apt install --yes ffmpeg
 
 WORKDIR /usr/src/app
 

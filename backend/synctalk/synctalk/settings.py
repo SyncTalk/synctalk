@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-o752h6)+hv+wdxjoa2-cqtov(4e47!)sx6h60o*@*sl2e0zyd=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['170.64.196.122', '127.0.0.1']
+ALLOWED_HOSTS = ['170.64.161.104', '127.0.0.1']
 
 
 # Application definition
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PyPDF2',
     'docx',
-    'ffmpeg',
     'rest_framework',
     'synctalk_app',
 ]
