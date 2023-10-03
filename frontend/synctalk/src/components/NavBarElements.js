@@ -96,11 +96,31 @@ export const UploadBtnLink = () => (
 );
 
 const DownloadIcon = () => <StyledFontAwesomeIcon icon={faDownload} />;
-export const DownloadBtnLink = () => (
-  <NavBtnLink to="/download">
-    <DownloadIcon />
-  </NavBtnLink>
-);
+export const DownloadBtnHtml = () => {
+  const getPageHtml = () => {
+    const htmlContent = document.documentElement.outerHTML;
+    return htmlContent;
+  };
+
+  const handleDownloadClick = () => {
+    const htmlContent = getPageHtml();
+    const blob = new Blob([htmlContent], { type: "text/html" });
+
+    const a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = "result.html";
+
+    a.click();
+
+    window.URL.revokeObjectURL(a.href);
+  };
+
+  return (
+    <NavBtnLink to="#" onClick={handleDownloadClick}>
+      <DownloadIcon />
+    </NavBtnLink>
+  );
+};
 
 const AboutIcon = () => <StyledFontAwesomeIcon icon={faInfoCircle} />;
 export const AboutBtnLink = () => (
