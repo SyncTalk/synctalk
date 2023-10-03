@@ -1,5 +1,7 @@
 FROM python:3.10
 
+RUN apt-get install ffmpeg
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
