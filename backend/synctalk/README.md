@@ -12,6 +12,7 @@ python -m pip install djangorestframework
 #processing text files
 pip install PyPDF2
 pip install python-docx
+pip install num2words
 
 #processing audio files
 python -m pip install -U openai-whisper
