@@ -11,7 +11,7 @@ right_side_enders = ['”','>','}',']',')']
 """break a block of text on up on punctuation and add these to a dictionary of sentences and write to a text file
 where ach line corresponds to broken piece of text by puntuation. Return any left over strings from block to be 
 processed seperately or returned to this function"""
-def blockStringSplit(block, sentenceDict,strSentence, sentenceLines):
+def blockStringSplit(block, strSentence, sentenceLines):
     str = strSentence[1] + block
     sentence = strSentence[0]
     strByChar = ''
@@ -32,7 +32,6 @@ def blockStringSplit(block, sentenceDict,strSentence, sentenceLines):
                 if (str[index + 1] in right_side_enders):
                     strByChar += str[index + 1]
                     index += 1
-            sentenceDict[sentence] = strByChar
             sentenceLines.write(strByChar + '\n')
             strByChar = ''
             sentence += 1
@@ -46,15 +45,12 @@ chunk to blockStringSplit"""
 def splitTextIntoSentences(file_path):
     extension = file_path.split('.')[1]
     strSentence = [1, '']
-    sentenceDict = {}
-    with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.json'), 'w') as destination, 
-          open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as sentenceLines):
+    with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as sentenceLines):
         if(extension == 'txt'):
                 file = open(file_path, 'r', encoding= "utf-8")
                 for line in file:
-                    strSentence = blockStringSplit(line, sentenceDict, strSentence,sentenceLines)
+                    strSentence = blockStringSplit(line, strSentence,sentenceLines)
                 if(strSentence[1]) :
-                    sentenceDict[strSentence[0]] = strSentence[1]  
                     sentenceLines.write(strSentence[1] + '\n')
         
         elif (extension == 'pdf'):
@@ -64,9 +60,8 @@ def splitTextIntoSentences(file_path):
             for pageNum in range(numPages):
                 pageobj = pdfReader.pages[pageNum]
                 str = pageobj.extract_text()
-                strSentence = blockStringSplit(str, sentenceDict, strSentence,sentenceLines)
+                strSentence = blockStringSplit(str, strSentence,sentenceLines)
             if(strSentence[1]) :
-                sentenceDict[strSentence[0]] = strSentence[1]
                 sentenceLines.write(strSentence[1] + '\n')
         
         elif (extension == 'docx'):
@@ -74,13 +69,11 @@ def splitTextIntoSentences(file_path):
             document = docx.Document(docxFileObj)
             for para in document.paragraphs:
                 text = para.text
-                strSentence = blockStringSplit(text, sentenceDict, strSentence,sentenceLines)
+                strSentence = blockStringSplit(text, strSentence,sentenceLines)
             if(strSentence[1]) :
-                sentenceDict[strSentence[0]] = strSentence[1]
                 sentenceLines.write(strSentence[1] + '\n')
                 
-        json.dump(sentenceDict, destination)
-        destination.close()
+
         sentenceLines.close()
     return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
 
