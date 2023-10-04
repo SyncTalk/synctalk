@@ -40,19 +40,24 @@ The backend provides an API endpoint for uploading text and audio data and retur
 **Make a POST Request:** Send a POST request to the following endpoint: ``` POST http://localhost:8000/upload/ ```    
 **Provide Form Data:**  In the request body, include form data with the following fields:    
 	-  `text`: The text data you want to upload.    
-	-  `audio`: The audio data you want to upload.   
+	-  `audio`: The audio data you want to upload. 
+	-  `translation` : The English translation of the text  
+	-  `lang`: the language of the original text. supported languages: en,zh,fr
+
 **Response:** Upon successful upload, you will receive a response with status code 200 and a JSON object containing timestamps and corresponding sentences. The response format will look like this:   
 ```
 { 
 	{  
 	"start":  "00:00:05",
 	"end":  "00:00:30"
-	"text":  "This is the first sentence."  
+	"text":  "这是第一句话"  
+	"translation": "This is the first sentence.”  
 	}, 
 	{
 	"start":  "00:00:31", 
 	"end": "00:00:50"
-	"text":  "This is the second sentence."  
+	"text":  "这是第二句话" 
+	"translation": "This is the second sentence.” 
 	}
 }
 ```

@@ -43,7 +43,7 @@ def blockStringSplit(block, strSentence, sentenceLines):
     return [sentence,str]
 
 
-def tokenizeCN(para):
+def tokenizeZH(para):
     para = re.sub('([。！？\?])([^”’])', r"\1\n\2", para)
     para = re.sub('(\.{6})([^”’])', r"\1\n\2", para)
     para = re.sub('(\…{2})([^”’])', r"\1\n\2", para)
@@ -83,14 +83,16 @@ def splitTextIntoSentences(file_path, lang):
     #remove extra lines
     text = text.replace('\n\n', ' ')
     text = re.sub('\s+',' ',text)
-    text = re.sub(r': ', r': \n', text)
-    text = re.sub(r'” ', r'” \n', text)
+
 
     #tokenize
     stringlist = []
-    if (lang=="cn"):
-        stringlist = tokenizeCN(text)
+    if (lang=="zh"): 
+        #nltk's tokenizer doesn't support chinese
+        stringlist = tokenizeZH(text)
     else:
+        text = re.sub(r': ', r': \n', text)
+        text = re.sub(r'” ', r'” \n', text)
         stringlist = sent_tokenize(text)
 
     print(stringlist)
