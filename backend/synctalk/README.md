@@ -19,6 +19,13 @@ pip install nltk
 #processing audio files
 python -m pip install -U openai-whisper
 sudo apt update && sudo apt install ffmpeg
+
+#set up alignment tool, bleualign
+
+git submodule init
+git submodule update
+cd backend/bleualign
+python setup.py install
 ```
 
 ## Start the development server  (Linux)
