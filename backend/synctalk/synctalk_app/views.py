@@ -61,10 +61,10 @@ class FileUploadView(APIView):
                 split_transl_path = splitTextIntoSentences(translation_path,"en")
                 alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
 
-                temp = open(RESULT_PATH,encoding="utf-8")
-                response = json.load(temp)
-                temp.close()
-                return Response(response, status=status.HTTP_200_OK)
+                # temp = open(RESULT_PATH,encoding="utf-8")
+                # response = json.load(temp)
+                # temp.close()
+                # return Response(response, status=status.HTTP_200_OK)
 
             #save the audio file
             audio_path = os.path.join(p,audio_file.name)
@@ -72,12 +72,15 @@ class FileUploadView(APIView):
                 for chunk in audio_file.chunks():
                     destination.write(chunk)
             print("getting timestamps")
-            timestamps = getTimestamps(audio_path, split_text_path)
+            timestamps = getTimestamps(audio_path, split_text_path,RESULT_PATH)
 
             
             #TODO: return alinged text
-            #return timestamps from whisper
-            return Response(timestamps, status=status.HTTP_200_OK)
+            temp = open(RESULT_PATH,encoding="utf-8")
+            response = json.load(temp)
+            temp.close()
+            return Response(response, status=status.HTTP_200_OK)
+            #return Response(timestamps, status=status.HTTP_200_OK)
             #return Response({'aa':'hello world'}, status=status.HTTP_200_OK)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
