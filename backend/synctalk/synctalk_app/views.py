@@ -23,7 +23,10 @@ class FileUploadView(APIView):
             audio_file = file_serializer.validated_data.get('audio')
             text_file = file_serializer.validated_data.get('text')
             translation_file = file_serializer.validated_data.get('translation')
-            lang = request.data["lang"]
+            try:
+                lang = request.data["lang"]
+            except:
+                return Response("language not specified", status=status.HTTP_400_BAD_REQUEST)
             print("text language = " +lang)
             
             #TODO: use request id to name files?
