@@ -6,7 +6,7 @@ from rest_framework import status
 from .serializers import UploadSerializer
 from rest_framework.viewsets import ViewSet
 from django.conf import settings
-from .functions import splitTextIntoSentences
+from .textPreprocess import splitTextIntoSentences
 from .speechToText import getTimestamps
 import os
 
