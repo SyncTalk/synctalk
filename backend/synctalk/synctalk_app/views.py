@@ -54,7 +54,8 @@ class FileUploadView(APIView):
                 print("tokenizing translation file")
                 split_transl_path = splitTextIntoSentences(translation_path,"en")
 
-                alignTranslation(split_text_path,split_transl_path)
+                aaa = alignTranslation(split_text_path,split_transl_path)
+                return Response(aaa, status=status.HTTP_200_OK)
 
             #save the audio file
             audio_path = os.path.join(p,audio_file.name)

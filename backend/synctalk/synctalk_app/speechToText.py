@@ -25,7 +25,7 @@ def getTimestamps(file_path, split_text_file_path):
 
     #save to json file
     with open(output_path, 'w') as json_file:
-        json.dump(result, json_file)
+        json.dump(result, json_file,encoding = 'utf-8')
     
     return result
 

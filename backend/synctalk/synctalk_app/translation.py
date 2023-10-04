@@ -52,18 +52,17 @@ def alignTranslation(text_path,translation_path):
     output_src_contents = output_src.read().splitlines()
     output_target_contents = output_target.read().splitlines()
 
-    result = []
+    result = {}
 
     for id, (src_text, target_text) in enumerate(zip(output_src_contents, output_target_contents), start=1):
         # Create a dictionary for each pair of source and target text
         entry = {
-            "id": id,
             "text": src_text,
             "translation": target_text
         }
         
         # Append the dictionary to the result list
-        result.append(entry)
+        result[id] = entry
     output_src.close()
     output_target.close()
 
@@ -73,7 +72,7 @@ def alignTranslation(text_path,translation_path):
     with open(json_filename, 'w', encoding = 'utf-8') as json_file:
         json.dump(result, json_file, ensure_ascii=False)
 
-    return json_filename
+    return result
 
 
 
