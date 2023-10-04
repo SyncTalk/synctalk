@@ -2,6 +2,7 @@ from deep_translator import GoogleTranslator
 import os
 from django.conf import settings
 from bleualign.align import Aligner
+import json
 
 
 def alignTranslation(text_path,translation_path):
@@ -40,28 +41,39 @@ def alignTranslation(text_path,translation_path):
         # if not passing anything or assigning None, they will use StringIO to save results.
         'output-src': os.path.join(directory,'aligner-output-src.txt'), 'output-target': os.path.join(directory,'aligner-output-target.txt')
         }
+    print("aligning!!")
     a = Aligner(options)
     a.mainloop()
-    output_src, output_target = a.results()
+    print("finished align")
+
+    output_src = open(os.path.join(directory,'aligner-output-src.txt'),'r')
+    output_target = open(os.path.join(directory,'aligner-output-target.txt'),)
 
     output_src_contents = output_src.read().splitlines()
     output_target_contents = output_target.read().splitlines()
 
-    # result = []
+    result = []
 
-    # # Loop through 'src_lines' and 'target_lines' simultaneously using zip
-    # for id, (src_text, target_text) in enumerate(zip(output_src_contents, output_target_contents), start=1):
-    #     # Create a dictionary for each pair of source and target text
-    #     entry = {
-    #         "id": id,
-    #         "text": src_text,
-    #         "translation": target_text
-    #     }
+    for id, (src_text, target_text) in enumerate(zip(output_src_contents, output_target_contents), start=1):
+        # Create a dictionary for each pair of source and target text
+        entry = {
+            "id": id,
+            "text": src_text,
+            "translation": target_text
+        }
         
-    #     # Append the dictionary to the result list
-    #     result.append(entry)
+        # Append the dictionary to the result list
+        result.append(entry)
+    output_src.close()
+    output_target.close()
 
-    # print(result)
+    print(result)
+
+    json_filename = os.path.join(directory,'result.json')
+    with open(json_filename, 'w', encoding = 'utf-8') as json_file:
+        json.dump(result, json_file, ensure_ascii=False)
+
+    return json_filename
 
 
 
