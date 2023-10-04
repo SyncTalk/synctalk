@@ -7,9 +7,11 @@ from .serializers import UploadSerializer
 from rest_framework.viewsets import ViewSet
 from django.conf import settings
 from .textPreprocess import splitTextIntoSentences
+from .textPreprocess import writeToresult
 from .speechToText import getTimestamps
 from .translation import alignTranslation
 import os
+import json
 
 # Create your views here.
 
@@ -36,6 +38,8 @@ class FileUploadView(APIView):
             p = os.path.join(settings.MEDIA_ROOT,foldername)
             if not os.path.exists(p):
                 os.makedirs(p)
+    
+            RESULT_PATH = os.path.join(p,"result.json")
 
             #save the text file
             text_path = os.path.join(p,text_file.name)
@@ -44,6 +48,8 @@ class FileUploadView(APIView):
                     destination.write(chunk)
             print("tokenizing text file")
             split_text_path = splitTextIntoSentences(text_path,lang)
+            writeToresult(RESULT_PATH,split_text_path)
+
             
 
             if translation_file:
@@ -53,9 +59,12 @@ class FileUploadView(APIView):
                         destination.write(chunk)
                 print("tokenizing translation file")
                 split_transl_path = splitTextIntoSentences(translation_path,"en")
+                alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
 
-                aaa = alignTranslation(split_text_path,split_transl_path)
-                return Response(aaa, status=status.HTTP_200_OK)
+                temp = open(RESULT_PATH,encoding="utf-8")
+                response = json.load(temp)
+                temp.close()
+                return Response(response, status=status.HTTP_200_OK)
 
             #save the audio file
             audio_path = os.path.join(p,audio_file.name)

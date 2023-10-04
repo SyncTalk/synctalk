@@ -107,6 +107,22 @@ def splitTextIntoSentences(file_path, lang):
     #return path to tokenized text file
     return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
 
+def writeToresult(res_path,text_path):
+    result = {}
+    text = open(text_path,'r')
+    lines = text.read().splitlines() # list of strings
+    text.close()
+    for i, line in enumerate(lines, start=1):
+        result[str(i)] = {"text": line}
+    
+    with open(res_path, 'w', encoding='utf-8') as f:
+        json.dump(result, f, ensure_ascii=False)
+ 
+
+    #dump to res_path
+    
+
+    
     
 
 

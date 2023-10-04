@@ -5,7 +5,7 @@ from bleualign.align import Aligner
 import json
 
 
-def alignTranslation(text_path,translation_path):
+def alignTranslation(text_path,translation_path,RESULT_PATH):
 
     directory = os.path.dirname(text_path)
     print(directory)
@@ -47,7 +47,7 @@ def alignTranslation(text_path,translation_path):
     print("finished align")
 
     output_src = open(os.path.join(directory,'aligner-output-src.txt'),'r')
-    output_target = open(os.path.join(directory,'aligner-output-target.txt'),)
+    output_target = open(os.path.join(directory,'aligner-output-target.txt'),'r')
 
     output_src_contents = output_src.read().splitlines()
     output_target_contents = output_target.read().splitlines()
@@ -66,13 +66,12 @@ def alignTranslation(text_path,translation_path):
     output_src.close()
     output_target.close()
 
-    print(result)
+    #print(result)
 
-    json_filename = os.path.join(directory,'result.json')
-    with open(json_filename, 'w', encoding = 'utf-8') as json_file:
+    with open(RESULT_PATH, 'w', encoding = 'utf-8') as json_file:
         json.dump(result, json_file, ensure_ascii=False)
+    return
 
-    return result
 
 
 
