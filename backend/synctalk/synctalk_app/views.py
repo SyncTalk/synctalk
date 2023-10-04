@@ -23,6 +23,8 @@ class FileUploadView(APIView):
             audio_file = file_serializer.validated_data.get('audio')
             text_file = file_serializer.validated_data.get('text')
             translation_file = file_serializer.validated_data.get('translation')
+            lang = request.data["lang"]
+            print("text language = " +lang)
             
             #TODO: use request id to name files?
             #create a folder
@@ -32,22 +34,21 @@ class FileUploadView(APIView):
                 os.makedirs(p)
 
             #save the text file
-            
             text_path = os.path.join(p,text_file.name)
             with open(text_path, 'wb') as destination:
                 for chunk in text_file.chunks():
                     destination.write(chunk)
             print("tokenizing text file")
-            split_text_path = splitTextIntoSentences(text_path)
+            split_text_path = splitTextIntoSentences(text_path,lang)
             
 
             if translation_file:
                 translation_path = os.path.join(p,translation_file.name)
                 with open(translation_path, 'wb') as destination:
-                    for chunk in text_file.chunks():
+                    for chunk in translation_file.chunks():
                         destination.write(chunk)
                 print("tokenizing translation file")
-                #split_text_path = splitTextIntoSentences(text_path)
+                split_transl_path = splitTextIntoSentences(translation_path,"en")
 
             #save the audio file
             audio_path = os.path.join(p,audio_file.name)

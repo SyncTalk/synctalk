@@ -3,6 +3,9 @@ import json
 import PyPDF2
 import docx
 
+import re
+from nltk.tokenize import sent_tokenize
+
 
 from django.conf import settings
 
@@ -39,41 +42,115 @@ def blockStringSplit(block, strSentence, sentenceLines):
     str = strByChar
     return [sentence,str]
 
+
+def tokenizeCN(para):
+    para = re.sub('([。！？\?])([^”’])', r"\1\n\2", para)
+    para = re.sub('(\.{6})([^”’])', r"\1\n\2", para)
+    para = re.sub('(\…{2})([^”’])', r"\1\n\2", para)
+    para = re.sub('([。！？\?][”’])([^，。！？\?])', r'\1\n\2', para)
+    para = para.rstrip() 
+    return para.split("\n")
+
+
+
+def splitTextIntoSentences(file_path, lang):
+    extension = file_path.split('.')[1]
+    text = ''
+
+    #read in text from files
+    if(extension == 'txt'):
+        a = open(file_path, 'r', encoding= "utf-8")
+        text = a.read()
+        a.close()
+
+    elif (extension == 'pdf'):
+        pdfFileObj = open(file_path, 'rb')
+        pdfReader = PyPDF2.PdfReader(pdfFileObj)
+        numPages = len(pdfReader.pages)
+        for pageNum in range(numPages):
+            pageobj = pdfReader.pages[pageNum]
+            str = pageobj.extract_text()
+            text = text+str
+        pdfFileObj.close()
+    elif (extension == 'docx'):
+        docxFileObj = open(file_path, 'rb')
+        document = docx.Document(docxFileObj)
+        for para in document.paragraphs:
+            str = para.text
+            text = text+str
+        docxFileObj.close()
+    
+    #remove extra lines
+    text = text.replace('\n\n', ' ')
+    text = re.sub('\s+',' ',text)
+    text = re.sub(r': ', r': \n', text)
+    text = re.sub(r'” ', r'” \n', text)
+
+    #tokenize
+    stringlist = []
+    if (lang=="cn"):
+        stringlist = tokenizeCN(text)
+    else:
+        stringlist = sent_tokenize(text)
+
+    print(stringlist)
+    #save to file_pathtext.txt
+    with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as file):
+        for sentence in stringlist:
+            # Write each sentence followed by a newline character
+            file.write(sentence.strip() + '\n')
+    
+    #TODO: maybe remove original file?
+
+    #return path to tokenized text file
+    return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
+
+    
+
+
+    
+
+
+
+
+
+
+
 """takes original text files and splits it into chunks, so that the system memory is not overly stressed and pass each text
 chunk to blockStringSplit"""
-
-def splitTextIntoSentences(file_path):
-    extension = file_path.split('.')[1]
-    strSentence = [1, '']
-    with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as sentenceLines):
-        if(extension == 'txt'):
-                file = open(file_path, 'r', encoding= "utf-8")
-                for line in file:
-                    strSentence = blockStringSplit(line, strSentence,sentenceLines)
-                if(strSentence[1]) :
-                    sentenceLines.write(strSentence[1] + '\n')
+# def splitTextIntoSentences(file_path):
+#     extension = file_path.split('.')[1]
+#     strSentence = [1, '']
+    
+#     with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as sentenceLines):
+#         if(extension == 'txt'):
+#                 file = open(file_path, 'r', encoding= "utf-8")
+#                 for line in file:
+#                     strSentence = blockStringSplit(line, strSentence,sentenceLines)
+#                 if(strSentence[1]) :
+#                     sentenceLines.write(strSentence[1] + '\n')
         
-        elif (extension == 'pdf'):
-            pdfFileObj = open(file_path, 'rb')
-            pdfReader = PyPDF2.PdfReader(pdfFileObj)
-            numPages = len(pdfReader.pages)
-            for pageNum in range(numPages):
-                pageobj = pdfReader.pages[pageNum]
-                str = pageobj.extract_text()
-                strSentence = blockStringSplit(str, strSentence,sentenceLines)
-            if(strSentence[1]) :
-                sentenceLines.write(strSentence[1] + '\n')
+#         elif (extension == 'pdf'):
+#             pdfFileObj = open(file_path, 'rb')
+#             pdfReader = PyPDF2.PdfReader(pdfFileObj)
+#             numPages = len(pdfReader.pages)
+#             for pageNum in range(numPages):
+#                 pageobj = pdfReader.pages[pageNum]
+#                 str = pageobj.extract_text()
+#                 strSentence = blockStringSplit(str, strSentence,sentenceLines)
+#             if(strSentence[1]) :
+#                 sentenceLines.write(strSentence[1] + '\n')
         
-        elif (extension == 'docx'):
-            docxFileObj = open(file_path, 'rb')
-            document = docx.Document(docxFileObj)
-            for para in document.paragraphs:
-                text = para.text
-                strSentence = blockStringSplit(text, strSentence,sentenceLines)
-            if(strSentence[1]) :
-                sentenceLines.write(strSentence[1] + '\n')
+#         elif (extension == 'docx'):
+#             docxFileObj = open(file_path, 'rb')
+#             document = docx.Document(docxFileObj)
+#             for para in document.paragraphs:
+#                 text = para.text
+#                 strSentence = blockStringSplit(text, strSentence,sentenceLines)
+#             if(strSentence[1]) :
+#                 sentenceLines.write(strSentence[1] + '\n')
                 
 
-        sentenceLines.close()
-    return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
+#         sentenceLines.close()
+#     return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
 
