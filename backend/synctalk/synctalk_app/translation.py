@@ -18,16 +18,17 @@ def alignTranslation(text_path,translation_path,RESULT_PATH):
         clean_line = line.strip()
         sentences.append(clean_line)
     srctext.close()
-
+    #print(sentences)
     #get machine translation
     print("translating")
     translated = GoogleTranslator(source='auto', target='en').translate_batch(sentences)
+    translated = list(filter(lambda x: x is not None, translated))
     print("finished translate")
-
+    #print(translated)
     #save to txt
     with (open(os.path.join(directory,'srctotarget.txt'), 'w', encoding= "utf-8") as file):
         for sentence in translated:
-            file.write(sentence.strip() + '\n')
+            file.write(sentence + '\n')
     
     #call aligner
     options = {
