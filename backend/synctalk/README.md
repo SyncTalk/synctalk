@@ -13,6 +13,8 @@ python -m pip install djangorestframework
 pip install PyPDF2
 pip install python-docx
 pip install num2words
+pip install -U deep-translator
+pip install nltk
 
 #processing audio files
 python -m pip install -U openai-whisper
