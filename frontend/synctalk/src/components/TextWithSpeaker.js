@@ -93,30 +93,70 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     }
   }, [currentTime, startTime, endTime]);
 
-  const handleWordClick = (event) => {
+  const handleWordClick = async (event) => {
     const word = event.target.textContent;
 
+    const response = await fetch(
+      `https://api.cognitive.microsofttranslator.com/detect?api-version=3.0`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Ocp-Apim-Subscription-Key": "6e712e735c384f7a99f0055f2ce90fce",
+          "Ocp-Apim-Subscription-Region": "australiaeast",
+        },
+        body: JSON.stringify([{ Text: word }]),
+      }
+    );
+
+    const data = await response.json();
+
+    const sourceLanguage = data[0].language;
+
+    const translationResponse = await fetch(
+      `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${sourceLanguage}&to=en`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Ocp-Apim-Subscription-Key": "6e712e735c384f7a99f0055f2ce90fce",
+          "Ocp-Apim-Subscription-Region": "australiaeast",
+        },
+        body: JSON.stringify([{ Text: word }]),
+      }
+    );
+
+    const translationData = await translationResponse.json();
+
+    const translation = translationData[0].translations[0].text;
+
     const popup = document.createElement("div");
-    popup.textContent = word;
+    popup.textContent = ` Translation: ${translation}`;
     popup.style.position = "absolute";
-    popup.style.top = `${event.clientY}px`;
-    popup.style.left = `${event.clientX}px`;
-
-    const closeIcon = document.createElement("span");
-    closeIcon.textContent = "X";
-    closeIcon.style.position = "absolute";
-    closeIcon.style.top = "0";
-    closeIcon.style.right = "0";
-    closeIcon.style.cursor = "pointer";
-
-    popup.appendChild(closeIcon);
+    popup.style.top = `${event.clientY - 40}px`;
+    popup.style.left = `${event.clientX - 15}px`;
+    popup.style.backgroundColor = "#FFF6CA";
+    popup.style.padding = "5px";
+    popup.style.borderRadius = "5px";
 
     document.body.appendChild(popup);
 
-    closeIcon.addEventListener("click", () => {
-      document.body.removeChild(popup);
-    });
+    const handleDocumentClick = (event) => {
+      if (!popup.contains(event.target)) {
+        setTimeout(() => {
+          document.body.removeChild(popup);
+        }, 10);
+        document.removeEventListener("click", handleDocumentClick);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
   };
+
+  const wordElements = document.querySelectorAll("#word");
+  wordElements.forEach((wordElement) => {
+    wordElement.addEventListener("dblclick", handleWordClick);
+  });
 
   return (
     <div className="text-with-speaker">
@@ -133,11 +173,6 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     </div>
   );
 };
-
-const wordElements = document.querySelectorAll("#word");
-wordElements.forEach((wordElement) => {
-  wordElement.addEventListener("click", handleWordClick);
-});
 
 TextWithSpeaker.propTypes = {
   text: PropTypes.string.isRequired,
