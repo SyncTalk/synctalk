@@ -41,13 +41,17 @@ Run backend server
 ## Usage
 The backend provides an API endpoint for uploading text and audio data and returning aligned text and audio
 
+## API:
+The base URL for all API requests is:  
+http://170.64.161.104:8000
+
 **Access the Upload Endpoint:**  - Use an API client, such as Postman, to interact with the upload API.  
-**Make a POST Request:** Send a POST request to the following endpoint: ``` POST http://localhost:8000/upload/ ```    
+**Make a POST Request:** Send a POST request to the following endpoint: ``` http://170.64.161.104:8000 ```    
 **Provide Form Data:**  In the request body, include form data with the following fields:    
 	-  `text`: The text data you want to upload.    
-	-  `audio`: The audio data you want to upload. 
+	-  `audio`: The audio data you want to upload.   
 	-  `translation` : The English translation of the text  
-	-  `lang`: the language of the original text. supported languages: en,zh,fr
+	-  `lang`: the language of the original text. supported languages: en,zh,fr,
 
 **Response:** Upon successful upload, you will receive a response with status code 200 and a JSON object containing timestamps and corresponding sentences. The response format will look like this:   
 ```
