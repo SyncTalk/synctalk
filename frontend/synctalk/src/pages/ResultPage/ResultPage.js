@@ -1,12 +1,13 @@
 import React from "react";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import TextWithSpeaker from "../../components/TextWithSpeaker";
-import textData from "../../test.json";
+import resultData from "../../result.json";
 import "./ResultPage.css";
 
 const Result = () => {
+
   const handleTimeUpdate = (time) => {
-    const lastTextEndTime = textData[textData.length - 1].endTime;
+    const lastTextEndTime = resultData[resultData.length - 1].end;
     if (time >= lastTextEndTime) {
       const audio = document.getElementById("audio");
       audio.pause();
@@ -21,12 +22,13 @@ const Result = () => {
       </div>
       <div className="body">
         <div className="text-container">
-          {textData.map(({ startTime, endTime, text }) => (
+          {resultData.map(({ start, end, text, translation }) => (
             <TextWithSpeaker
-              key={startTime}
+              key = {start}
               text={text}
-              startTime={startTime}
-              endTime={endTime}
+              translation={translation}
+              startTime={start}
+              endTime={end}
             />
           ))}
         </div>

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 //  import axios from "axios";
 
-const TextWithSpeaker = ({ text, startTime, endTime }) => {
+const TextWithSpeaker = ({ text, translation, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -22,44 +22,6 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
       setIsPlaying(true);
     }
   };
-
-  /*
-  async function getTranslation(word) {
-    const { v4: uuidv4 } = require("uuid");
-    const apiKey = "6e712e735c384f7a99f0055f2ce90fce";
-    const location = "australiaeast"; // e.g., 'eastus' or 'westus'
-    const endpoint = "https://api.cognitive.microsofttranslator.com";
-
-    try {
-      const response = await axios({
-        baseURL: endpoint,
-        url: "/translate",
-        method: "post",
-        headers: {
-          "Ocp-Apim-Subscription-Key": apiKey,
-          // location required if you're using a multi-service or regional (not global) resource.
-          "Ocp-Apim-Subscription-Region": location,
-          "Content-type": "application/json",
-          "X-ClientTraceId": uuidv4().toString(),
-        },
-        params: {
-          "api-version": "3.0",
-          from: "fr",
-          to: "en",
-        },
-        data: [
-          {
-            text: word,
-          },
-        ],
-        responseType: "json",
-      });
-      setTranslation(response.data[0].translations[0].text);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  */
 
   useEffect(() => {
     const audio = document.getElementById("audio");
@@ -166,16 +128,20 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
             {word}{" "}
           </span>
         ))}
+        <span className="translation-linebreak"><br/></span>
+        <span className="translation">{translation}</span>
+        <button className="speaker-button" onClick={handleAudioClick}>
+          <FontAwesomeIcon icon={faVolumeUp} />
+        </button>
       </span>
-      <button className="speaker-button" onClick={handleAudioClick}>
-        <FontAwesomeIcon icon={faVolumeUp} />
-      </button>
+      <span><br/><br/></span>
     </div>
   );
 };
 
 TextWithSpeaker.propTypes = {
   text: PropTypes.string.isRequired,
+  translation: PropTypes.string.isRequired,
   startTime: PropTypes.number.isRequired,
   endTime: PropTypes.number.isRequired,
 };

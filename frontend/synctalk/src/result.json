@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "text": "第一章 当我还只有六岁的时候，在一本描写原始森林的名叫《真实的故事》的书中， 看到了一副精彩的插画，画的是一条蟒蛇正在吞食一只大野兽。",
+    "translation": "Chapter 1 When I was six years old, I once saw an amazing picture in a book about life in the jungle, called “True Stories”. It showed a boa constrictor who was swallowing an animal.",
+    "start": 0.8799999999999961,
+    "end": 4.12
+  },
+  {
+    "id": 2,
+    "text": "页头上就是那副 画的摹本。",
+    "translation": "Here is a copy of the picture:",
+    "start": 4.12,
+    "end": 4.72
+  },
+  {
+    "id": 3,
+    "text": "这本书中写道：“这些蟒蛇把它们的猎获物不加咀嚼地囫囵吞下，尔后就不能再动弹了；它们就在长长的六个月的睡眠中消化这些食物。”",
+    "translation": "And here’s what it said in the book: “Boa constrictors swallow their prey whole without chewing it.",
+    "start": 4.72,
+    "end": 4.9
+  },
+  {
+    "id": 4,
+    "text": "当时，我对丛林中的奇遇想得很多，于是，我也用彩色铅笔画出了我的第一 副图画。",
+    "translation": "I thought a lot about the adventures of the jungle, and after a while I took a coloured pencil and drew my first picture.",
+    "start": 5.0,
+    "end": 5.46
+  }
+]
