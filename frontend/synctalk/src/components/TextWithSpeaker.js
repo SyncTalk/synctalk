@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-//  import axios from "axios";
 
 const TextWithSpeaker = ({ text, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
-  //const [translation, setTranslation] = useState("");
+  const [selectedWord, setSelectedWord] = useState(null);
 
   const handleAudioClick = () => {
     const audio = document.getElementById("audio");
@@ -44,7 +43,6 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         },
         params: {
           "api-version": "3.0",
-          from: "fr",
           to: "en",
         },
         data: [
@@ -54,9 +52,11 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         ],
         responseType: "json",
       });
-      setTranslation(response.data[0].translations[0].text);
+      const data = await response.json();
+      console.log(JSON.stringify(response.data, null, 4));
+      return data[0].translations[0].text;
     } catch (error) {
-      console.error(error);
+      console.error("Error translating text:", error);
     }
   }
   */
@@ -93,76 +93,23 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     }
   }, [currentTime, startTime, endTime]);
 
-  const handleWordClick = async (event) => {
-    const word = event.target.textContent;
+  const handleWordClick = async (word) => {
+    // Call an API to get the translation of the word
+    const translation = "await getTranslation(word)";
 
-    const response = await fetch(
-      `https://api.cognitive.microsofttranslator.com/detect?api-version=3.0`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Ocp-Apim-Subscription-Key": "6e712e735c384f7a99f0055f2ce90fce",
-          "Ocp-Apim-Subscription-Region": "australiaeast",
-        },
-        body: JSON.stringify([{ Text: word }]),
-      }
-    );
-
-    const data = await response.json();
-
-    const sourceLanguage = data[0].language;
-
-    const translationResponse = await fetch(
-      `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${sourceLanguage}&to=en`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Ocp-Apim-Subscription-Key": "6e712e735c384f7a99f0055f2ce90fce",
-          "Ocp-Apim-Subscription-Region": "australiaeast",
-        },
-        body: JSON.stringify([{ Text: word }]),
-      }
-    );
-
-    const translationData = await translationResponse.json();
-
-    const translation = translationData[0].translations[0].text;
-
-    const popup = document.createElement("div");
-    popup.textContent = ` Translation: ${translation}`;
-    popup.style.position = "absolute";
-    popup.style.top = `${event.clientY - 40}px`;
-    popup.style.left = `${event.clientX - 15}px`;
-    popup.style.backgroundColor = "#FFF6CA";
-    popup.style.padding = "5px";
-    popup.style.borderRadius = "5px";
-
-    document.body.appendChild(popup);
-
-    const handleDocumentClick = (event) => {
-      if (!popup.contains(event.target)) {
-        setTimeout(() => {
-          document.body.removeChild(popup);
-        }, 10);
-        document.removeEventListener("click", handleDocumentClick);
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
+    // Set the selected word and its translation in the state
+    setSelectedWord({ word, translation });
   };
-
-  const wordElements = document.querySelectorAll("#word");
-  wordElements.forEach((wordElement) => {
-    wordElement.addEventListener("dblclick", handleWordClick);
-  });
 
   return (
     <div className="text-with-speaker">
       <span className={`text ${isCurrent ? "playing" : ""}`}>
         {text.split(" ").map((word, index) => (
-          <span key={index} id="word" onClick={handleWordClick}>
+          <span
+            key={index}
+            onClick={() => handleWordClick(word)}
+            title={selectedWord?.word === word ? selectedWord.translation : ""}
+          >
             {word}{" "}
           </span>
         ))}
