@@ -10,22 +10,20 @@ Before you can run this project, you'll need to ensure that you have the followi
 python -m pip install Django
 python -m pip install djangorestframework
 
-#processing text files
+#module for processing text files
 pip install PyPDF2
 pip install python-docx
 pip install num2words
 pip install -U deep-translator
 pip install nltk
 
-#processing audio files
+#module for processing audio files
 python -m pip install -U openai-whisper
 sudo apt update && sudo apt install ffmpeg
 
 #set up alignment tool, bleualign
 git submodule init
-git submodule update
-cd backend/bleualign
-python setup.py install
+
 ```
 
 ## Start the development server  (Linux)
