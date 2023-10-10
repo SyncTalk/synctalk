@@ -57,3 +57,4 @@ jobs:
       - name: lint
         run: npx eslint .
         timeout-minutes: 1
+    timeout-minutes: 5

@@ -6,7 +6,7 @@ from rest_framework import status
 from .serializers import UploadSerializer
 from rest_framework.viewsets import ViewSet
 from django.conf import settings
-from .functions import splitTextIntoSentences
+from .textPreprocess import splitTextIntoSentences
 from .speechToText import getTimestamps
 import os
 
@@ -30,25 +30,38 @@ class FileUploadView(APIView):
             p = os.path.join(settings.MEDIA_ROOT,foldername)
             if not os.path.exists(p):
                 os.makedirs(p)
+
+            #save the text file
             
+            text_path = os.path.join(p,text_file.name)
+            with open(text_path, 'wb') as destination:
+                for chunk in text_file.chunks():
+                    destination.write(chunk)
+            print("tokenizing text file")
+            split_text_path = splitTextIntoSentences(text_path)
+            
+
+            if translation_file:
+                translation_path = os.path.join(p,translation_file.name)
+                with open(translation_path, 'wb') as destination:
+                    for chunk in text_file.chunks():
+                        destination.write(chunk)
+                print("tokenizing translation file")
+                #split_text_path = splitTextIntoSentences(text_path)
+
             #save the audio file
             audio_path = os.path.join(p,audio_file.name)
             with open(audio_path, 'wb') as destination:
                 for chunk in audio_file.chunks():
                     destination.write(chunk)
-            timestamps = getTimestamps(audio_path)
+            print("getting timestamps")
+            timestamps = getTimestamps(audio_path, split_text_path)
 
-            #save the text file
-            text_path = os.path.join(p,text_file.name)
-            if text_file:
-                with open(text_path, 'wb') as destination:
-                    for chunk in text_file.chunks():
-                        destination.write(chunk)
-                splitTextIntoSentences(text_path)
             
             #TODO: return alinged text
             #return timestamps from whisper
             return Response(timestamps, status=status.HTTP_200_OK)
+            #return Response({'aa':'hello world'}, status=status.HTTP_200_OK)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
