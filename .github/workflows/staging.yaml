@@ -110,7 +110,7 @@ jobs:
       - name: move files from backend directory to current directory
         run: |
           shopt -s dotglob
-          mv --verbose backend/synctalk/* .
+          mv --verbose backend/* .
           shopt -u dotglob
         timeout-minutes: 1
 

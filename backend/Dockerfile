@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.10
 
 RUN apt update && apt upgrade --yes && apt install --yes ffmpeg
 
