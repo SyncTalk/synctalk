@@ -112,7 +112,7 @@ const UploadPage = () => {
 
   return (
     <div>
-      <div className="nav-bar"></div>
+      {/* <div className="nav-bar"></div> */}
       <div className="title upload-title">Upload Your Files</div>
       <div className="subtitle">
         <div className="three-part">Audio</div>

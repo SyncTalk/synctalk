@@ -32,7 +32,7 @@ const Loading = () => {
       <img className="infographic" src={url} alt="cat" />
       <div className="title">
         <p>Generating</p>
-        <ReactLoading type="bubbles" color="#1D3557" height={10} width={200} />
+        <ReactLoading type="bubbles" color="#1D3557" />
       </div>
     </div>
   );
