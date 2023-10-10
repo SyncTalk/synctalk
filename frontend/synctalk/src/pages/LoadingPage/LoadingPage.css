@@ -21,7 +21,8 @@
 }
 
 .loading .title p {
-  font-weight: 500;
+  margin-right: 20px;
+  font-weight: bold;
   font-size: 64px;
   text-align: center;
   color: #1d3557;

@@ -6,7 +6,7 @@ import {
   NavRight,
   HomeBtnLink,
   UploadBtnLink,
-  DownloadBtnLink,
+  DownloadBtnHtml,
   AboutBtnLink,
   CancelBtnLink,
 } from "./NavBarElements";
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   switch (page) {
     case "result":
-      rightButton = <DownloadBtnLink />;
+      rightButton = <DownloadBtnHtml />;
       break;
     case "about":
       rightButton = <UploadBtnLink />;

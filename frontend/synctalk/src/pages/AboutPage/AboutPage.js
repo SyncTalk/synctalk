@@ -7,7 +7,6 @@ import "../AboutPage/AboutPage.css";
 const AboutPage = () => {
   return (
     <div>
-      <div className="nav-bar"></div>
       <div className="icon">
         <img src={aboutIcon} alt="about icon" className="about-icon"></img>
       </div>
