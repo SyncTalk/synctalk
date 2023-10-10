@@ -5,7 +5,7 @@ import difflib
 from difflib import SequenceMatcher 
 from num2words import num2words
 
-def getTimestamps(file_path, split_text_file_path):
+def getTimestamps(file_path, split_text_file_path,RESULT_PATH):
     #send data to whisper
     model = whisper.load_model('small')
     result = model.transcribe(file_path, word_timestamps = True ,fp16=False)
@@ -20,17 +20,21 @@ def getTimestamps(file_path, split_text_file_path):
     
     words = getTranscribedWords(result)
 
-    result = joinText(words, split_text_file_path)
-    output_path = file_path + ".json"
+    #save whisper result to json file for debugging
+    with open(os.path.join(os.path.dirname(file_path),"whisper.json"), 'w') as json_file:
+        json.dump(result, json_file,ensure_ascii=False)
+
+    # get alignment result
+    result = joinText(words, split_text_file_path,RESULT_PATH)
 
     #save to json file
-    with open(output_path, 'w') as json_file:
-        json.dump(result, json_file)
+    with open(RESULT_PATH, 'w') as json_file:
+        json.dump(result, json_file,ensure_ascii=False)
     
     return result
 
 ''' join sentences that are not ending with punctuation specified below'''
-def joinText(data, split_text_file_path):
+def joinText(data, split_text_file_path,RESULT_PATH):
     # Initialize an empty list to store the new data
     new_data = []
     punctuation = ['.','!','?','"']
@@ -41,8 +45,15 @@ def joinText(data, split_text_file_path):
     data_length = len(data)
     word_no = 0
 
-    file = open(split_text_file_path, 'r', encoding= "utf-8")
-    for line in file: 
+    temp = open(RESULT_PATH,'r',encoding="utf-8")
+    result = json.load(temp)
+    temp.close()
+
+    #file = open(split_text_file_path, 'r', encoding= "utf-8")
+    for entry in result: 
+        line = result[entry]["text"]
+        print(line)
+
         original = line
         no_punctuation = removePunctuation(line)
         no_punctuation = no_punctuation.strip()
@@ -55,6 +66,8 @@ def joinText(data, split_text_file_path):
         new_dict = {}
         new_dict['text'] = original
         new_dict['words'] = []
+        new_dict['start'] = "-1"
+        new_dict['end'] = "-1"
         
         index = 0
         no_critical_mistakes = 0
@@ -162,6 +175,9 @@ def joinText(data, split_text_file_path):
             break_no += 1
             number_loops += 1
         new_data.append(new_dict)
+
+        result[entry]['start'] = new_dict['start']
+        result[entry]['end']=new_dict['end']
         
             
     '''# If the text ends with a punctuation, add it to the new data as is
@@ -194,7 +210,8 @@ def joinText(data, split_text_file_path):
     while i<len(new_data):
         new_data[i]['id'] = i
         i+=1
-    return new_data
+    #return new_data
+    return result
 
 def removePunctuation(string):
     # initializing punctuations string
