@@ -1,12 +1,12 @@
 .upload-title {
-  padding-top: 120px;
+  padding-top: 110px;
   background-color: #f2f2f2;
   font-weight: bold;
 }
 
 .subtitle {
   display: flex;
-  margin-top: 60px;
+  margin-top: 50px;
   justify-content: center;
   font-size: 32px;
   font-weight: bold;
@@ -24,14 +24,14 @@
 }
 
 .upload-instrument {
-  margin-top: 43px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 }
 
 .upload-square {
-  margin-top: 45px;
-  padding-bottom: 18px;
+  margin-top: 30px;
+  padding-bottom: 10px;
   display: flex;
   justify-content: center;
 }
@@ -69,4 +69,8 @@ input[type="file"] {
   background-color: #457b9d;
   border-radius: 4px;
   color: #fff;
+}
+
+.language-select {
+  text-align: center;
 }
