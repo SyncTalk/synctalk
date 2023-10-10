@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+//  import axios from "axios";
 
 const TextWithSpeaker = ({ text, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
-  const [selectedWord, setSelectedWord] = useState(null);
+  //const [translation, setTranslation] = useState("");
 
   const handleAudioClick = () => {
     const audio = document.getElementById("audio");
@@ -43,6 +44,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         },
         params: {
           "api-version": "3.0",
+          from: "fr",
           to: "en",
         },
         data: [
@@ -52,11 +54,9 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
         ],
         responseType: "json",
       });
-      const data = await response.json();
-      console.log(JSON.stringify(response.data, null, 4));
-      return data[0].translations[0].text;
+      setTranslation(response.data[0].translations[0].text);
     } catch (error) {
-      console.error("Error translating text:", error);
+      console.error(error);
     }
   }
   */
@@ -93,23 +93,36 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     }
   }, [currentTime, startTime, endTime]);
 
-  const handleWordClick = async (word) => {
-    // Call an API to get the translation of the word
-    const translation = "await getTranslation(word)";
+  const handleWordClick = (event) => {
+    const word = event.target.textContent;
 
-    // Set the selected word and its translation in the state
-    setSelectedWord({ word, translation });
+    const popup = document.createElement("div");
+    popup.textContent = word;
+    popup.style.position = "absolute";
+    popup.style.top = `${event.clientY}px`;
+    popup.style.left = `${event.clientX}px`;
+
+    const closeIcon = document.createElement("span");
+    closeIcon.textContent = "X";
+    closeIcon.style.position = "absolute";
+    closeIcon.style.top = "0";
+    closeIcon.style.right = "0";
+    closeIcon.style.cursor = "pointer";
+
+    popup.appendChild(closeIcon);
+
+    document.body.appendChild(popup);
+
+    closeIcon.addEventListener("click", () => {
+      document.body.removeChild(popup);
+    });
   };
 
   return (
     <div className="text-with-speaker">
       <span className={`text ${isCurrent ? "playing" : ""}`}>
         {text.split(" ").map((word, index) => (
-          <span
-            key={index}
-            onClick={() => handleWordClick(word)}
-            title={selectedWord?.word === word ? selectedWord.translation : ""}
-          >
+          <span key={index} id="word" onClick={handleWordClick}>
             {word}{" "}
           </span>
         ))}
@@ -120,6 +133,11 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     </div>
   );
 };
+
+const wordElements = document.querySelectorAll("#word");
+wordElements.forEach((wordElement) => {
+  wordElement.addEventListener("click", handleWordClick);
+});
 
 TextWithSpeaker.propTypes = {
   text: PropTypes.string.isRequired,
