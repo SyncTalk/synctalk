@@ -91,7 +91,7 @@ const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => 
     const translation = translationData[0].translations[0].text;
 
     const popup = document.createElement("div");
-    popup.textContent = ` Translation: ${translation}`;
+    popup.innerHTML = ` <strong>Translation:</strong> ${translation}`;
     popup.style.position = "absolute";
     popup.style.top = `${event.clientY - 40}px`;
     popup.style.left = `${event.clientX - 15}px`;

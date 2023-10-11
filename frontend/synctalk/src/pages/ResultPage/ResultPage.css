@@ -8,7 +8,7 @@
 
 .result .header {
   width: 100%;
-  height: 13%;
+  height: 14%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,8 +31,8 @@
 
 .result .text-container {
   position: relative;
-  height: 93%;
-  top: 2%;
+  height: 91.5%;
+  top: 3.5%;
   bottom: 5%;
   overflow-y: scroll;
 }
