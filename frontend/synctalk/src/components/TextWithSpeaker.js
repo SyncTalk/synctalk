@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
-const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => {
+const TextWithSpeaker = ({
+  ref,
+  id,
+  text,
+  translation,
+  startTime,
+  endTime,
+}) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -66,7 +73,7 @@ const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => 
           "Ocp-Apim-Subscription-Region": "australiaeast",
         },
         body: JSON.stringify([{ Text: word }]),
-      }
+      },
     );
 
     const data = await response.json();
@@ -83,7 +90,7 @@ const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => 
           "Ocp-Apim-Subscription-Region": "australiaeast",
         },
         body: JSON.stringify([{ Text: word }]),
-      }
+      },
     );
 
     const translationData = await translationResponse.json();
@@ -120,20 +127,28 @@ const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => 
   });
 
   return (
-    <div className={`text-with-speaker ${isCurrent ? "playing" : ""}`} ref={ref}>
+    <div
+      className={`text-with-speaker ${isCurrent ? "playing" : ""}`}
+      ref={ref}
+    >
       <span className={`text ${isCurrent ? "playing" : ""}`}>
         {text.split(" ").map((word) => (
           <span key={id} id="word" onClick={handleWordClick}>
             {word}{" "}
           </span>
         ))}
-        <span className="translation-linebreak"><br/></span>
+        <span className="translation-linebreak">
+          <br />
+        </span>
         <span className="translation">{translation}</span>
         <button className="speaker-button" onClick={handleAudioClick}>
           <FontAwesomeIcon icon={faVolumeUp} />
         </button>
       </span>
-      <span><br/><br/></span>
+      <span>
+        <br />
+        <br />
+      </span>
     </div>
   );
 };
