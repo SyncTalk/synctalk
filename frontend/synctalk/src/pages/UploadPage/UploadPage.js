@@ -10,6 +10,7 @@ const UploadPage = () => {
   const [selectedMp3FileName, setSelectedMp3FileName] = useState("");
   const [selectedDocxTxtFileName1, setSelectedDocxTxtFileName1] = useState("");
   const [selectedDocxTxtFileName2, setSelectedDocxTxtFileName2] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const handleMp3FileSelect = (event) => {
     const file = event.target.files[0];
@@ -19,6 +20,10 @@ const UploadPage = () => {
     } else {
       alert("Please select a valid mp3 file");
     }
+  };
+
+  const handleLanguageSelect = (event) => {
+    setSelectedLanguage(event.target.value);
   };
 
   const isDocxOrTxtOrPdfFile = (file) => {
@@ -92,6 +97,7 @@ const UploadPage = () => {
       formData.append("mp3File", selectedMp3File);
       formData.append("docxTxtFile1", selectedDocxTxtFile1);
       formData.append("docxTxtFile2", selectedDocxTxtFile2);
+      formData.append("language", selectedLanguage);
 
       axios
         .post("/upload", formData, {
@@ -112,8 +118,23 @@ const UploadPage = () => {
 
   return (
     <div>
-      {/* <div className="nav-bar"></div> */}
       <div className="title upload-title">Upload Your Files</div>
+      <div className="language-select">
+        <label htmlFor="language">
+          Select Language for your Audio file and Text file:{" "}
+        </label>
+        <select
+          id="language"
+          value={selectedLanguage}
+          onChange={handleLanguageSelect}
+        >
+          <option value="en">English</option>
+          <option value="cn">Chinese</option>
+          <option value="fr">French</option>
+          {/* Other Languages */}
+        </select>
+        <div>(Translation file must be in English)</div>
+      </div>
       <div className="subtitle">
         <div className="three-part">Audio</div>
         <div className="three-part">Text</div>

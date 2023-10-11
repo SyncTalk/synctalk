@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-//  import axios from "axios";
 
-const TextWithSpeaker = ({ text, startTime, endTime }) => {
+const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
-  //const [translation, setTranslation] = useState("");
 
   const handleAudioClick = () => {
     const audio = document.getElementById("audio");
@@ -22,44 +20,6 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
       setIsPlaying(true);
     }
   };
-
-  /*
-  async function getTranslation(word) {
-    const { v4: uuidv4 } = require("uuid");
-    const apiKey = "6e712e735c384f7a99f0055f2ce90fce";
-    const location = "australiaeast"; // e.g., 'eastus' or 'westus'
-    const endpoint = "https://api.cognitive.microsofttranslator.com";
-
-    try {
-      const response = await axios({
-        baseURL: endpoint,
-        url: "/translate",
-        method: "post",
-        headers: {
-          "Ocp-Apim-Subscription-Key": apiKey,
-          // location required if you're using a multi-service or regional (not global) resource.
-          "Ocp-Apim-Subscription-Region": location,
-          "Content-type": "application/json",
-          "X-ClientTraceId": uuidv4().toString(),
-        },
-        params: {
-          "api-version": "3.0",
-          from: "fr",
-          to: "en",
-        },
-        data: [
-          {
-            text: word,
-          },
-        ],
-        responseType: "json",
-      });
-      setTranslation(response.data[0].translations[0].text);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  */
 
   useEffect(() => {
     const audio = document.getElementById("audio");
@@ -138,6 +98,7 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
     popup.style.backgroundColor = "#FFF6CA";
     popup.style.padding = "5px";
     popup.style.borderRadius = "5px";
+    popup.style.zIndex = "1000";
 
     document.body.appendChild(popup);
 
@@ -159,23 +120,29 @@ const TextWithSpeaker = ({ text, startTime, endTime }) => {
   });
 
   return (
-    <div className="text-with-speaker">
+    <div className={`text-with-speaker ${isCurrent ? "playing" : ""}`} ref={ref}>
       <span className={`text ${isCurrent ? "playing" : ""}`}>
-        {text.split(" ").map((word, index) => (
-          <span key={index} id="word" onClick={handleWordClick}>
+        {text.split(" ").map((word) => (
+          <span key={id} id="word" onClick={handleWordClick}>
             {word}{" "}
           </span>
         ))}
+        <span className="translation-linebreak"><br/></span>
+        <span className="translation">{translation}</span>
+        <button className="speaker-button" onClick={handleAudioClick}>
+          <FontAwesomeIcon icon={faVolumeUp} />
+        </button>
       </span>
-      <button className="speaker-button" onClick={handleAudioClick}>
-        <FontAwesomeIcon icon={faVolumeUp} />
-      </button>
+      <span><br/><br/></span>
     </div>
   );
 };
 
 TextWithSpeaker.propTypes = {
+  ref: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
+  translation: PropTypes.string.isRequired,
   startTime: PropTypes.number.isRequired,
   endTime: PropTypes.number.isRequired,
 };
