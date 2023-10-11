@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-//  import axios from "axios";
 
-const TextWithSpeaker = ({ id, text, translation, startTime, endTime }) => {
+const TextWithSpeaker = ({ ref, id, text, translation, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
-  //const [translation, setTranslation] = useState("");
 
   const handleAudioClick = () => {
     const audio = document.getElementById("audio");
@@ -122,7 +120,7 @@ const TextWithSpeaker = ({ id, text, translation, startTime, endTime }) => {
   });
 
   return (
-    <div className="text-with-speaker">
+    <div className={`text-with-speaker ${isCurrent ? "playing" : ""}`} ref={ref}>
       <span className={`text ${isCurrent ? "playing" : ""}`}>
         {text.split(" ").map((word) => (
           <span key={id} id="word" onClick={handleWordClick}>
@@ -141,6 +139,7 @@ const TextWithSpeaker = ({ id, text, translation, startTime, endTime }) => {
 };
 
 TextWithSpeaker.propTypes = {
+  ref: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   translation: PropTypes.string.isRequired,

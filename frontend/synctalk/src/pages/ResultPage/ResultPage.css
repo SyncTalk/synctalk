@@ -8,7 +8,7 @@
 
 .result .header {
   width: 100%;
-  height: 12%;
+  height: 13%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,6 @@
   top: 0;
   color: #1d3557;
   background-color: white;
-  z-index: 1;
 }
 
 .result .body {
@@ -32,8 +31,8 @@
 
 .result .text-container {
   position: relative;
-  height: 95%;
-  top: 1%;
+  height: 93%;
+  top: 2%;
   bottom: 5%;
   overflow-y: scroll;
 }
