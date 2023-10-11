@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 //  import axios from "axios";
 
-const TextWithSpeaker = ({ text, translation, startTime, endTime }) => {
+const TextWithSpeaker = ({ id, text, translation, startTime, endTime }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -100,6 +100,7 @@ const TextWithSpeaker = ({ text, translation, startTime, endTime }) => {
     popup.style.backgroundColor = "#FFF6CA";
     popup.style.padding = "5px";
     popup.style.borderRadius = "5px";
+    popup.style.zIndex = "1000";
 
     document.body.appendChild(popup);
 
@@ -123,8 +124,8 @@ const TextWithSpeaker = ({ text, translation, startTime, endTime }) => {
   return (
     <div className="text-with-speaker">
       <span className={`text ${isCurrent ? "playing" : ""}`}>
-        {text.split(" ").map((word, index) => (
-          <span key={index} id="word" onClick={handleWordClick}>
+        {text.split(" ").map((word) => (
+          <span key={id} id="word" onClick={handleWordClick}>
             {word}{" "}
           </span>
         ))}
@@ -140,6 +141,7 @@ const TextWithSpeaker = ({ text, translation, startTime, endTime }) => {
 };
 
 TextWithSpeaker.propTypes = {
+  id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   translation: PropTypes.string.isRequired,
   startTime: PropTypes.number.isRequired,

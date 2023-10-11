@@ -22,9 +22,9 @@ const Result = () => {
       </div>
       <div className="body">
         <div className="text-container">
-          {resultData.map(({ start, end, text, translation }) => (
+          {resultData.map(({ id, start, end, text, translation }) => (
             <TextWithSpeaker
-              key = {start}
+              key = {id}
               text={text}
               translation={translation}
               startTime={start}
