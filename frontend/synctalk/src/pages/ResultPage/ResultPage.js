@@ -11,14 +11,14 @@ const Result = () => {
     // Update the scrolling every second
     const intervalId = setInterval(() => {
       // Get the current playing TextWithSpeaker component
-      const currentText = document.querySelector('.text-container .playing');
+      const currentText = document.querySelector(".text-container .playing");
 
       // Scroll the current playing TextWithSpeaker component into view
       if (currentText) {
         currentText.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-          inline: 'center'
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
         });
       }
     }, 10);
@@ -46,7 +46,7 @@ const Result = () => {
           {resultData.map(({ id, start, end, text, translation }) => (
             <TextWithSpeaker
               ref={textPlayingRef}
-              key = {id}
+              key={id}
               text={text}
               translation={translation}
               startTime={start}
