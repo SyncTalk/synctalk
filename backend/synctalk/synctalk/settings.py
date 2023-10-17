@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['170.64.161.104', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://synctalk.tech/'
+    'http://synctalk.tech'
 ]
 
 INSTALLED_APPS = [
