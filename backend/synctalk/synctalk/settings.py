@@ -32,6 +32,11 @@ ALLOWED_HOSTS = ['170.64.161.104', '127.0.0.1']
 
 # Application definition
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://synctalk.tech/'
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +48,7 @@ INSTALLED_APPS = [
     'docx',
     'rest_framework',
     'synctalk_app',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'synctalk.urls'
