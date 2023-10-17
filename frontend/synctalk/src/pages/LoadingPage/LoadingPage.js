@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactLoading from "react-loading";
 import "./LoadingPage.css";
 
@@ -21,18 +21,11 @@ const Loading = () => {
       });
   }
 
-  useEffect(() => {
-    // Fetch the image when the component mounts
+  fetchImage();
+
+  setInterval(() => {
     fetchImage();
-
-    // Fetch the image every 2 seconds
-    const intervalId = setInterval(() => {
-      fetchImage();
-    }, 2000);
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []);
+  }, 5000);
 
   return (
     <div className="loading">
