@@ -51,7 +51,7 @@ def joinText(data, split_text_file_path,RESULT_PATH):
 
     #file = open(split_text_file_path, 'r', encoding= "utf-8")
     for entry in result: 
-        line = result[entry]["text"]
+        line = entry["text"]
         print(line)
 
         original = line
@@ -176,8 +176,10 @@ def joinText(data, split_text_file_path,RESULT_PATH):
             number_loops += 1
         new_data.append(new_dict)
 
-        result[entry]['start'] = new_dict['start']
-        result[entry]['end']=new_dict['end']
+        #append align result to result.json
+        entry['start'] = new_dict['start']
+        entry['end']=new_dict['end']
+        entry['words']=new_dict['words']
         
             
     '''# If the text ends with a punctuation, add it to the new data as is

@@ -95,7 +95,7 @@ def splitTextIntoSentences(file_path, lang):
         text = re.sub(r'” ', r'” \n', text)
         stringlist = sent_tokenize(text)
 
-    print(stringlist)
+    # print(stringlist)
     #save to file_pathtext.txt
     with (open(os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt'), 'w', encoding= "utf-8") as file):
         for sentence in stringlist:
@@ -108,12 +108,12 @@ def splitTextIntoSentences(file_path, lang):
     return os.path.join(settings.MEDIA_ROOT, file_path + 'text.txt')
 
 def writeToresult(res_path,text_path):
-    result = {}
+    result = []
     text = open(text_path,'r')
     lines = text.read().splitlines() # list of strings
     text.close()
     for i, line in enumerate(lines, start=1):
-        result[str(i)] = {"text": line}
+        result.append({"id":i , "text": line})
     
     with open(res_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False)
