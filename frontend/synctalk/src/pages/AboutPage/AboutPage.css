@@ -1,0 +1,17 @@
+.title {
+  font-weight: bold;
+}
+
+.instruction {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.instruction span {
+  font-weight: bold;
+}
+
+.about-icon {
+  height: 150px;
+  padding-top: 120px;
+}

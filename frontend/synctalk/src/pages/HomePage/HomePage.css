@@ -1,0 +1,43 @@
+.home-title {
+  padding-left: 268px;
+  padding-top: 140px;
+  background-color: #f2f2f2;
+  color: #1d3557;
+  font-size: 150px;
+  font-weight: bold;
+}
+
+.home-container {
+  margin-left: 268px;
+}
+
+.home-intro {
+  width: 638px;
+}
+
+.example {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: #1d3557;
+}
+
+.example img {
+  width: 28px;
+}
+
+.use-title {
+  color: #1d3557;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.intro-video {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.home-end-button {
+  padding-bottom: 30px;
+}

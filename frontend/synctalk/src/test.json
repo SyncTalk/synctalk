@@ -1,0 +1,37 @@
+[
+  {
+    "startTime": 0,
+    "endTime": 5,
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "speaker": "John Doe",
+    "language": "en-US"
+  },
+  {
+    "startTime": 5,
+    "endTime": 10,
+    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "speaker": "Jane Smith",
+    "language": "en-GB"
+  },
+  {
+    "startTime": 10,
+    "endTime": 15,
+    "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "speaker": "John Doe",
+    "language": "en-US"
+  },
+  {
+    "startTime": 15,
+    "endTime": 20,
+    "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "speaker": "Jane Smith",
+    "language": "en-GB"
+  },
+  {
+    "startTime": 20,
+    "endTime": 25,
+    "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "speaker": "John Doe",
+    "language": "en-US"
+  }
+]

@@ -1,0 +1,157 @@
+name: staging
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  development_frontend:
+    name: development-frontend
+    uses: ./.github/workflows/development-frontend.yaml
+
+  staging_frontend:
+    name: staging-frontend
+    needs: development_frontend
+    runs-on: ubuntu-22.04
+    steps:
+      - name: sparse checkout frontend directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: frontend
+          sparse-checkout-cone-mode: false
+        timeout-minutes: 1
+
+      - name: move files from frontend directory to current directory
+        run: |
+          shopt -s dotglob
+          mv --verbose frontend/synctalk/* .
+          shopt -u dotglob
+        timeout-minutes: 1
+
+      - name: remove frontend directory
+        run: rm --recursive --verbose frontend
+        timeout-minutes: 1
+
+      - name: setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+        timeout-minutes: 1
+
+      - id: setup_node_modules_cache
+        name: setup node_modules cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+        timeout-minutes: 1
+
+      - if: ${{ steps.setup_node_modules_cache.outputs.cache-hit != 'true' }}
+        name: clean install dependencies
+        run: npm clean-install
+        timeout-minutes: 5
+
+      - name: build react app
+        run: npm run-script build
+        timeout-minutes: 5
+
+      - name: setup digitalocean command line interface
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        timeout-minutes: 1
+
+      - name: login to digitalocean registry
+        run: doctl registry login --expiry-seconds 300
+        timeout-minutes: 1
+
+      - name: build staging web server image
+        run: docker build --tag registry.digitalocean.com/synctalk/staging-web-server:latest .
+        timeout-minutes: 5
+
+      - name: push staging web server image
+        run: docker push registry.digitalocean.com/synctalk/staging-web-server:latest
+        timeout-minutes: 5
+
+      - name: deploy staging web server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.STAGING_WEB_SERVER_HOST }}
+          username: ${{ secrets.STAGING_WEB_SERVER_USERNAME }}
+          key: ${{ secrets.STAGING_WEB_SERVER_KEY }}
+          script: |
+            # pull new staging web server image
+            docker pull registry.digitalocean.com/synctalk/staging-web-server:latest
+            # stop old staging web server container
+            docker stop staging-web-server
+            # remove old staging web server container
+            docker rm staging-web-server
+            # create and run new staging web server container from new staging web server image
+            docker run -detach --name staging-web-server --publish 80:80 registry.digitalocean.com/synctalk/staging-web-server:latest
+            # remove unused images
+            docker image prune --force
+        timeout-minutes: 5
+    timeout-minutes: 10
+
+  staging_backend:
+    name: staging-backend
+    runs-on: ubuntu-22.04
+    steps:
+      - name: sparse checkout backend directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: backend
+          sparse-checkout-cone-mode: false
+        timeout-minutes: 1
+
+      - name: move files from backend directory to current directory
+        run: |
+          shopt -s dotglob
+          mv --verbose backend/* .
+          shopt -u dotglob
+        timeout-minutes: 1
+
+      - name: remove backend directory
+        run: rm --recursive --verbose backend
+        timeout-minutes: 1
+
+      - name: setup digitalocean command line interface
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        timeout-minutes: 1
+
+      - name: login to digitalocean registry
+        run: doctl registry login --expiry-seconds 900
+        timeout-minutes: 1
+
+      - name: build staging backend server image
+        run: docker build --tag registry.digitalocean.com/synctalk/staging-backend-server:latest .
+        timeout-minutes: 10
+
+      - name: push staging backend server image
+        run: docker push registry.digitalocean.com/synctalk/staging-backend-server:latest
+        timeout-minutes: 20
+
+      - name: deploy staging backend server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
+          username: ${{ secrets.STAGING_BACKEND_SERVER_USERNAME }}
+          key: ${{ secrets.STAGING_BACKEND_SERVER_KEY }}
+          script: |
+            # pull new staging backend server image
+            docker pull registry.digitalocean.com/synctalk/staging-backend-server:latest
+            # stop old staging backend server container
+            docker stop staging-backend-server
+            # remove old staging backend server container
+            docker rm staging-backend-server
+            # create and run new staging backend server container from new staging backend server image
+            docker run --detach --name staging-backend-server --publish 8000:8000 registry.digitalocean.com/synctalk/staging-backend-server:latest
+            # remove unused images
+            docker image prune --force
+        timeout-minutes: 20
+    timeout-minutes: 30

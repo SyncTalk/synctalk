@@ -1,0 +1,8 @@
+# testing
+/coverage
+
+# production
+/build
+
+# documentation
+*.md
