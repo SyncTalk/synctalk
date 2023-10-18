@@ -6,6 +6,7 @@ charset-normalizer==3.3.0
 click==8.1.7
 deep-translator==1.11.4
 Django==4.2.6
+django-cors-headers==4.3.0
 djangorestframework==3.14.0
 docopt==0.6.2
 filelock==3.12.4
@@ -25,7 +26,7 @@ numba==0.58.0
 numpy==1.25.2
 openai-whisper==20230918
 PyPDF2==3.0.1
-python-docx==0.8.11
+python-docx==1.0.1
 pytz==2023.3.post1
 regex==2023.10.3
 requests==2.31.0
@@ -33,7 +34,7 @@ soupsieve==2.5
 sqlparse==0.4.4
 sympy==1.12
 tiktoken==0.3.3
-torch==2.0.1
+torch==2.1.0
 tqdm==4.66.1
 typing_extensions==4.8.0
-urllib3==2.0.6
+urllib3==2.0.7
