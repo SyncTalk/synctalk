@@ -74,7 +74,7 @@ sqlparse==0.4.4
 stack-data==0.6.3
 sympy==1.12
 tiktoken==0.3.3
-torch==2.1.0
+torch==2.0.1
 tqdm==4.66.1
 traitlets==5.10.1
 triton==2.0.0
