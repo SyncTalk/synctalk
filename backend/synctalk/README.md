@@ -43,8 +43,7 @@ Run backend server
 The backend provides an API endpoint for uploading text and audio data and returning aligned text and audio
 
 ## API:
-The base URL for all API requests is:  
-http://170.64.161.104:8000
+The base URL for all API requests is: http://170.64.161.104:8000  
 
 **Access the Upload Endpoint:**  - Use an API client, such as Postman, to interact with the upload API.  
 **Make a POST Request:** Send a POST request to the following endpoint: ``` http://170.64.161.104:8000/upload/ ```    
