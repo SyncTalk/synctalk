@@ -14,6 +14,6 @@ WORKDIR /usr/src/app/synctalk
 
 RUN pip install --no-cache-dir --requirement requirements.txt
 
-RUN python3 nltk_install.py
+RUN python nltk_install.py
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
