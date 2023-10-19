@@ -5,7 +5,7 @@
   - [Table of Contents](#table-of-contents)
   - [About](#about)
   - [Features](#features)
-  - [Getting Started](#getting-started)
+  - [Deployment Instructions](#deployment-instructions)
     - [Local Machines](#local-machines)
       - [Prerequisites](#prerequisites)
       - [Installation](#installation)
@@ -26,7 +26,7 @@ SyncTalk is a web application that allows users to upload audio, original text, 
 
 - **Language Learning**: Users can listen to the audio while reading the original text and its translation, facilitating language learning.
 
-## Getting Started
+## Deployment Instructions
 
 ### Local Machines
 

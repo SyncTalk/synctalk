@@ -27,7 +27,7 @@ git submodule init
 
 ```
 
-## Start the development server  (Linux)
+## Deployment Instructions
 
 Active virtual environment
 `python3 -m venv venv`
