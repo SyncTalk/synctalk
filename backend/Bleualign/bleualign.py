@@ -8,7 +8,7 @@ import sys
 from command_utils import load_arguments
 from bleualign.align import Aligner
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     options = load_arguments(sys.argv)
 
     a = Aligner(options)

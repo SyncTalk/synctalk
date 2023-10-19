@@ -18,7 +18,9 @@ import os
 from bleualign.align import Aligner
 
 if len(sys.argv) < 5:
-    sys.stderr.write('Usage: python batch_align directory source_suffix target_suffix translation_suffix\n')
+    sys.stderr.write(
+        "Usage: python batch_align directory source_suffix target_suffix translation_suffix\n"
+    )
     exit()
 
 directory = sys.argv[1]
@@ -27,40 +29,40 @@ target_suffix = sys.argv[3]
 translation_suffix = sys.argv[4]
 
 options = {}
-options['factored'] = False
-options['filter'] = None
-options['filterthreshold'] = 90
-options['filterlang'] = None
-options['targettosrc'] = []
-options['eval'] = None
-options['galechurch'] = None
-options['verbosity'] = 1
-options['printempty'] = False
-options['output'] = None
+options["factored"] = False
+options["filter"] = None
+options["filterthreshold"] = 90
+options["filterlang"] = None
+options["targettosrc"] = []
+options["eval"] = None
+options["galechurch"] = None
+options["verbosity"] = 1
+options["printempty"] = False
+options["output"] = None
 
 jobs = []
 
-for source_document in [d for d in os.listdir(directory) if d.endswith('.' + source_suffix)]:
-
+for source_document in [
+    d for d in os.listdir(directory) if d.endswith("." + source_suffix)
+]:
     source_document = os.path.join(directory, source_document)
-    target_document = source_document[:-len(source_suffix)] + target_suffix
-    translation_document = source_document[:-len(source_suffix)] + translation_suffix
+    target_document = source_document[: -len(source_suffix)] + target_suffix
+    translation_document = source_document[: -len(source_suffix)] + translation_suffix
 
     # Sanity checks
     for f in source_document, target_document, translation_document:
         if not os.path.isfile(f):
-            sys.stderr.write('ERROR: File {0} expected, but not found\n'.format(f))
+            sys.stderr.write("ERROR: File {0} expected, but not found\n".format(f))
             exit()
 
     jobs.append((source_document, target_document, translation_document))
 
-for (source_document,target_document,translation_document) in jobs:
-
-    options['srcfile'] = source_document
-    options['targetfile'] = target_document
-    options['srctotarget'] = [translation_document]
-    options['output-src'] = source_document + '.aligned'
-    options['output-target'] = target_document + '.aligned'
+for source_document, target_document, translation_document in jobs:
+    options["srcfile"] = source_document
+    options["targetfile"] = target_document
+    options["srctotarget"] = [translation_document]
+    options["output-src"] = source_document + ".aligned"
+    options["output-target"] = target_document + ".aligned"
 
     a = Aligner(options)
     a.mainloop()
