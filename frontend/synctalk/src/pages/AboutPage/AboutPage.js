@@ -49,7 +49,7 @@ const AboutPage = () => {
         </p>
       </div>
       <div className="center-button">
-        <Link to="/loading">
+        <Link to="/upload">
           <button>Get Started</button>
         </Link>
       </div>
