@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "../UploadPage/UploadPage.css";
 import uploadIcon from "../../assets/upload-icon.jpg";
 
@@ -94,19 +93,24 @@ const UploadPage = () => {
   const handleUpload = () => {
     if (selectedMp3File && selectedDocxTxtFile1 && selectedDocxTxtFile2) {
       const formData = new FormData();
-      formData.append("mp3File", selectedMp3File);
-      formData.append("docxTxtFile1", selectedDocxTxtFile1);
-      formData.append("docxTxtFile2", selectedDocxTxtFile2);
-      formData.append("language", selectedLanguage);
+      formData.append("audio", selectedMp3File);
+      formData.append("text", selectedDocxTxtFile1);
+      formData.append("translation", selectedDocxTxtFile2);
+      formData.append("lang", selectedLanguage);
 
-      axios
-        .post("/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+      fetch("http://170.64.161.104:8000/upload/", {
+        method: "POST",
+        body: formData,
+      })
         .then((response) => {
-          console.log("Upload successful", response.data);
+          if (response.ok) {
+            return response.json(); // Assuming the Django backend responds with JSON data
+          } else {
+            throw new Error("Upload failed");
+          }
+        })
+        .then((data) => {
+          console.log("Upload successful", data);
         })
         .catch((error) => {
           console.error("Upload failed", error);
@@ -129,7 +133,7 @@ const UploadPage = () => {
           onChange={handleLanguageSelect}
         >
           <option value="en">English</option>
-          <option value="cn">Chinese</option>
+          <option value="zh">Chinese</option>
           <option value="fr">French</option>
           {/* Other Languages */}
         </select>

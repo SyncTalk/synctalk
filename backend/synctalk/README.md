@@ -6,6 +6,7 @@ We also used Whisper, which is a powerful general-purpose speech recognition mod
 ## Requirements
 
 Before you can run this project, you'll need to ensure that you have the following dependencies installed:
+
 ```
 #Django
 python -m pip install Django
@@ -27,7 +28,7 @@ git submodule init
 
 ```
 
-## Start the development server  (Linux)
+## Start the development server (Linux)
 
 Active virtual environment
 `python3 -m venv venv`
@@ -40,6 +41,7 @@ Run backend server
 `python3 manage.py runserver`
 
 ## Usage
+
 The backend provides an API endpoint for uploading text and audio data and returning aligned text and audio
 
 ## API:
@@ -55,7 +57,6 @@ The base URL for all API requests is: http://170.64.161.104:8000
 
 <sup>* Full list of languages supported by whisper but we haven't test: Afrikaans (af), Arabic (ar), Armenian (hy), Azerbaijani (az), Belarusian (be), Bosnian (bs), Bulgarian (bg), Catalan (ca), Chinese (zh), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en), Estonian (et), Finnish (fi), French (fr), Galician (gl), German (de), Greek (el), Hebrew (he), Hindi (hi), Hungarian (hu), Icelandic (is), Indonesian (id), Italian (it), Japanese (ja), Kannada (kn), Kazakh (kk), Korean (ko), Latvian (lv), Lithuanian (lt), Macedonian (mk), Malay (ms), Marathi (mr), Maori (mi), Nepali (ne), Norwegian (no), Persian (fa), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Serbian (sr), Slovak (sk), Slovenian (sl), Spanish (es), Swahili (sw), Swedish (sv), Tagalog (tl), Tamil (ta), Thai (th), Turkish (tr), Ukrainian (uk), Urdu (ur), Vietnamese (vi), and Welsh (cy).  <sup> 
 
-**Response:** Upon successful upload, you will receive a response with status code 200 and a JSON object containing timestamps and corresponding sentences. The response format will look like this:   
 ```
 { 
 	{  
