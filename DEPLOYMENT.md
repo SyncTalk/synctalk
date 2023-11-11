@@ -83,6 +83,12 @@
     git clone https://github.com/SyncTalk/synctalk.git .
     ```
 
+3. Store the upload URL in an environment variable
+
+    ```bash
+    echo "REACT_APP_UPLOAD_URL=http://170.64.161.104:8000/upload/" > frontend/synctalk/.env
+    ```
+
 4. Build the Docker images
 
     ```bash
