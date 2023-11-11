@@ -4,12 +4,8 @@
 
 - [Deployment](#deployment)
   - [Table of Contents](#table-of-contents)
-  - [Local Deployment](#local-deployment)
     - [Requirements](#requirements)
     - [Steps](#steps)
-  - [Production Deployment](#production-deployment)
-
-## Local Deployment
 
 ### Requirements
 
@@ -46,9 +42,6 @@
 
 5. Open the application in your browser
 
-```bash
-    http://localhost:3000
-```
-
-## Production Deployment
-
+    ```bash
+        http://localhost:3000
+    ```
