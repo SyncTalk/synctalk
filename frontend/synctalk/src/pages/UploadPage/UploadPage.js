@@ -106,7 +106,7 @@ const UploadPage = () => {
       formData.append("lang", selectedLanguage);
 
       try {
-        const response = await fetch("http://localhost:8000/upload/", {
+        const response = await fetch(process.env.UPLOAD_URL, {
           method: "POST",
           body: formData,
         });

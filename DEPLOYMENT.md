@@ -32,7 +32,9 @@
     git clone https://github.com/SyncTalk/synctalk.git .
     ```
 
-3. Build the Docker images
+3. 
+
+4. Build the Docker images
 
     ```bash
     docker build -t synctalk-web-server frontend/synctalk
