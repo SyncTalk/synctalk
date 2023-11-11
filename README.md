@@ -20,7 +20,7 @@ Warren Ang [ang.warrenn@gmail.com](mailto:ang.warrenn@gmail.com"mailto:ang.warre
 
 ### Documentation
 
-[Frontend Documentation](frontend/synctalk/README.md)
-[Backend Documentation](backend/README.md)
-[Deployment Documentation](documentation/DEPLOYMENT.md)
-[Architecture Documentation](documentation/TECHNICAL-ARTEFACTS.md)
+- [Frontend Documentation](frontend/synctalk/README.md)
+- [Backend Documentation](backend/README.md)
+- [Deployment Documentation](documentation/DEPLOYMENT.md)
+- [Architecture Documentation](documentation/TECHNICAL-ARTEFACTS.md)
