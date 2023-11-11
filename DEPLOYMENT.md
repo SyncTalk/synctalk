@@ -32,7 +32,11 @@
     git clone https://github.com/SyncTalk/synctalk.git .
     ```
 
-3. 
+3. Store 
+
+    ```bash
+    echo "UPLOAD_URL=http://localhost:8000/upload" > frontend/synctalk/.env
+    ```
 
 4. Build the Docker images
 
@@ -41,14 +45,14 @@
     docker build -t synctalk-backend-server backend
     ```
 
-4. Run the Docker images
+5. Run the Docker images
 
     ```bash
     docker run -d -p 3000:80 synctalk-web-server
     docker run -d -p 8000:8000 synctalk-backend-server
     ```
 
-5. Open a browser and navigate to the following URL to view the application
+6. Open a browser and navigate to the following URL to view the application
 
     <http://localhost:3000>
 

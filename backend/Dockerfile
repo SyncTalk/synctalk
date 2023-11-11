@@ -24,4 +24,6 @@ WORKDIR /usr/src/app
 
 COPY synctalk synctalk
 
+WORKDIR /usr/src/app/synctalk
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
