@@ -35,7 +35,7 @@
 3. Store the upload URL in an environment variable
 
     ```bash
-    echo "UPLOAD_URL=http://localhost:8000/upload" > frontend/synctalk/.env
+    echo "REACT_APP_UPLOAD_URL=http://localhost:8000/upload" > frontend/synctalk/.env
     ```
 
 4. Build the Docker images
