@@ -1,6 +1,7 @@
 # SyncTalk
 
 ## Table of Contents
+
 - [SyncTalk](#synctalk)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
@@ -40,14 +41,14 @@ Before you begin, ensure you have met the following requirements:
 #### Installation
 
 1. Clone the repository to your local machine:
-   ```git clone https://github.com/username/synctalk.git```
+   `git clone https://github.com/username/synctalk.git`
 2. Navigate to the project directory:
-    Unix: ```cd frontend/synctalk```
-    Windows: ```cd frontend\synctalk```
+   Unix: `cd frontend/synctalk`
+   Windows: `cd frontend\synctalk`
 3. Install dependencies:
-    ```npm install``` or ```yarn install```
+   `npm install` or `yarn install`
 4. Start the application:
-    ```npm start``` or ```yarn start```
+   `npm start` or `yarn start`
 5. Access the application in your web browser at http://localhost:3000.
 
 ### Server
