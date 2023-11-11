@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["localhost"]
 
 # Application definition
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://synctalk.tech"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://synctalk.tech", "http://localhost:80"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
