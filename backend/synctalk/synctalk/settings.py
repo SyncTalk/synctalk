@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ["localhost", "synctalk.tech", "170.64.161.104"]
 
 # Application definition
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://synctalk.tech", "http://170.64.161.104"]
+CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
