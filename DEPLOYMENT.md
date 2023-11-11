@@ -32,7 +32,7 @@
     git clone https://github.com/SyncTalk/synctalk.git .
     ```
 
-3. Store 
+3. Store the upload URL in an environment variable
 
     ```bash
     echo "UPLOAD_URL=http://localhost:8000/upload" > frontend/synctalk/.env
