@@ -93,4 +93,4 @@
 
 6. Open a browser and navigate to the following URL to view the application
 
-    <http://<server ip>>
+    http://\<server ip\>
