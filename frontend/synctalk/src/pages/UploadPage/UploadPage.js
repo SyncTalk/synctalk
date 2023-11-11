@@ -106,7 +106,7 @@ const UploadPage = () => {
       formData.append("lang", selectedLanguage);
 
       try {
-        const response = await fetch(process.env.UPLOAD_URL, {
+        const response = await fetch(process.env.REACT_APP_UPLOAD_URL, {
           method: "POST",
           body: formData,
         });

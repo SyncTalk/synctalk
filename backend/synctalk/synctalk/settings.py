@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "synctalk.tech", "170.64.161.104"]
 
-
 # Application definition
 
 CORS_ORIGIN_WHITELIST = ["http://localhost", "http://synctalk.tech", "http://170.64.161.104"]
