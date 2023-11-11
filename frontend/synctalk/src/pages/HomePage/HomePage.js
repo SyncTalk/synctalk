@@ -1,4 +1,3 @@
-// Qingyue Zhu
 import React from "react";
 import { Link } from "react-router-dom";
 import "../HomePage/HomePage.css";
@@ -57,7 +56,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="right-button">
-        <Link to="/upload">
+        <Link to="/about">
           <button>Get started</button>
         </Link>
       </div>
@@ -71,7 +70,7 @@ const HomePage = () => {
         </video>
       </div>
       <div className="center-button home-end-button">
-        <Link to="/upload">
+        <Link to="/about">
           <button>Get started</button>
         </Link>
       </div>
