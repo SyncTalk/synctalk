@@ -52,18 +52,18 @@ class FileUploadView(APIView):
 
             
 
-            #if translation_file:
-             #   translation_path = os.path.join(p,translation_file.name)
-              #  with open(translation_path, 'wb') as destination:
-               #     for chunk in translation_file.chunks():
-                #        destination.write(chunk)
-                #print("tokenizing translation file")
-                #split_transl_path = splitTextIntoSentences(translation_path,"en")
-                #alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
+            if translation_file:
+                translation_path = os.path.join(p,translation_file.name)
+                with open(translation_path, 'wb') as destination:
+                    for chunk in translation_file.chunks():
+                        destination.write(chunk)
+                print("tokenizing translation file")
+                split_transl_path = splitTextIntoSentences(translation_path,"en")
+                alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
 
-                # temp = open(RESULT_PATH,encoding="utf-8")
-                # response = json.load(temp)
-                # temp.close()
+                temp = open(RESULT_PATH,encoding="utf-8")
+                response = json.load(temp)
+                temp.close()
                 # return Response(response, status=status.HTTP_200_OK)
 
             #save the audio file
@@ -80,24 +80,7 @@ class FileUploadView(APIView):
             response = json.load(temp)
             temp.close()
 
-            # # Process the segments
-            # for key in sorted(response.keys(), key=lambda x: int(x)):
-            #     segment = response[key]
-            #     print(segment)
-                
-            #     # Recalculate start time if it's -1 based on the end time of the previous segment
-            #     if segment["start"] == -1:
-            #         segment["start"] = start_time+0.1
-                
-            #     # Recalculate end time if it's -1 based on the start time of the next segment
-            #     if segment["end"] == -1:
-            #         next_key = str(int(key) + 1)
-            #         if next_key in response:
-            #             next_segment = response[next_key]
-            #             segment["end"] = next_segment["start"]-0.1
-                
-            #     # Update start_time for the next iteration
-            #     start_time = segment["end"]
+        
 
             # Convert the modified data back to a JSON string
             response = json.dumps(response, ensure_ascii=False, indent=4)
