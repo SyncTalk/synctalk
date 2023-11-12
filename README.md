@@ -1,5 +1,13 @@
 # SyncTalk
 
+## Table of Contents
+
+- [SyncTalk](#synctalk)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Team Information](#team-information)
+  - [Documentation](#documentation)
+
 ## Project Overview
 
 SyncTalk is a web application designed to empower language learners by seamlessly aligning audio, transcriptions, and translations. We utilizes the Whisper model, an automatic speech recognition system developed by OpenAI, to ensure high accuracy in aligning audio with text, Additionally, we leverage the Microsoft Translator API to provide word-level annotation, enabling users to explore the meanings, pronunciations, and context of specific words.
