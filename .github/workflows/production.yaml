@@ -1,0 +1,27 @@
+name: production
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-22.04
+    steps:
+      - name: deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
+          username: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
+          key: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
+          script: |
+            cd synctalk
+            git pull
+            docker build --tag synctalk-web-server frontend/synctalk
+            docker build --tag synctalk-backend-server backend
+            docker rm --force synctalk-web-server synctalk-backend-server
+            docker run -detach --name synctalk-web-server --publish 80:80 synctalk-web-server
+            docker run -detach --name synctalk-backend-server --publish 8000:8000 synctalk-backend-server
