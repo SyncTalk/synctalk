@@ -15,8 +15,8 @@ jobs:
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
-          username: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
-          key: ${{ secrets.STAGING_BACKEND_SERVER_HOST }}
+          username: ${{ secrets.STAGING_BACKEND_SERVER_USERNAME }}
+          key: ${{ secrets.STAGING_BACKEND_SERVER_KEY }}
           script: |
             cd synctalk
             git pull
