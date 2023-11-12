@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../UploadPage/UploadPage.css";
 import uploadIcon from "../../assets/upload-icon.jpg";
-import LoadingPage from "../LoadingPage/LoadingPage"; // for loading page
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 const UploadPage = () => {
   const [selectedMp3File, setSelectedMp3File] = useState(null);
@@ -12,7 +12,7 @@ const UploadPage = () => {
   const [selectedDocxTxtFileName1, setSelectedDocxTxtFileName1] = useState("");
   const [selectedDocxTxtFileName2, setSelectedDocxTxtFileName2] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [showLoading, setShowLoading] = useState(false); // for loading page
+  const [showLoading, setShowLoading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(null);
   const navigate = useNavigate();
 
@@ -97,7 +97,7 @@ const UploadPage = () => {
 
   const handleUpload = async () => {
     if (selectedMp3File && selectedDocxTxtFile1 && selectedDocxTxtFile2) {
-      setShowLoading(true); // for loading page
+      setShowLoading(true);
 
       const formData = new FormData();
       formData.append("audio", selectedMp3File);
@@ -106,7 +106,7 @@ const UploadPage = () => {
       formData.append("lang", selectedLanguage);
 
       try {
-        const response = await fetch(process.env.REACT_APP_UPLOAD_URL, {
+        const response = await fetch("http://170.64.161.104:8000/upload/", {
           method: "POST",
           body: formData,
         });
@@ -114,8 +114,11 @@ const UploadPage = () => {
         if (response.ok) {
           const data = await response.json();
           setUploadStatus("success");
-          console.log(data);
-          navigate("/result", { state: { resultData: data } });
+          const audioBlob = new Blob([selectedMp3File], {
+            type: selectedMp3File.type,
+          });
+          const audioObjectURL = URL.createObjectURL(audioBlob);
+          navigate("/result", { state: { resultData: data, audioObjectURL } });
         } else {
           throw new Error("Upload failed");
         }
@@ -123,9 +126,8 @@ const UploadPage = () => {
         setUploadStatus("fail");
         console.error("Upload failed", error);
       } finally {
-        // for loading page
-        setShowLoading(false); // for loading page
-      } // for loading page
+        setShowLoading(false);
+      }
     } else {
       alert("Please make sure to select all three required files");
     }
@@ -133,10 +135,9 @@ const UploadPage = () => {
 
   return (
     <div>
-      {showLoading ? ( // for loading page
-        <LoadingPage /> // for loading page
+      {showLoading ? (
+        <LoadingPage />
       ) : (
-        // for loading page
         <div>
           <div className="title upload-title">Upload Your Files</div>
           <div className="language-select">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -11,7 +12,7 @@ import SpeedControl from "../SpeedControl";
 import VolumeControl from "../VolumeControl.js";
 import "./AudioPlayer.css";
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ audioObjectURL }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -62,7 +63,7 @@ const AudioPlayer = () => {
     <div className="audio-player">
       <audio
         id="audio"
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        src={audioObjectURL}
         type="audio/mpeg"
         onTimeUpdate={handleTimeUpdate}
       />
@@ -90,6 +91,10 @@ const AudioPlayer = () => {
       </div>
     </div>
   );
+};
+
+AudioPlayer.propTypes = {
+  audioObjectURL: PropTypes.string.isRequired, // Specify the type and make it required
 };
 
 export default AudioPlayer;
