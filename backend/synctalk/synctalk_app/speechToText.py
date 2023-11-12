@@ -18,14 +18,18 @@ def getTimestamps(file_path, split_text_file_path,RESULT_PATH):
         for seg in result:
             del seg[field]
     
+
     words_info, words_count,words_list = getTranscribedWords(result)
+    print(words_count)
 
     #save whisper result to json file for debugging
     with open(os.path.join(os.path.dirname(file_path),"whisper.json"), 'w') as json_file:
         json.dump(result, json_file,ensure_ascii=False)
 
     # get alignment result
+
     result = align(words_info, words_list, words_count, RESULT_PATH)
+
     #result = joinText(words_info, split_text_file_path,RESULT_PATH)
 
     #save to json file
@@ -42,7 +46,7 @@ def align(words_info, words_list, words_count, RESULT_PATH):
     sentence_sequences = []
 
     for entry in result:
-        sentence_and_sequences = []
+        sentence_and_sequences = [None] * 2
         sentence = entry['text']
         #first element is the original sentence, second element is the list of lists of possible sequences (start and end locations in words_info) and
         #similarity with original sentence
@@ -60,20 +64,24 @@ def align(words_info, words_list, words_count, RESULT_PATH):
     
     #find best combination of sentence sequences where order of sentences is maintained and there is no overlap of sequences
     finalSequences = orderSequences(sentence_sequences)
+    print(finalSequences)
     index = 0
     for entry in result:
         entry['start'] = -1
         entry['end']= -1
         entry['words']= []
         for sentence in finalSequences[0]:
-            similarity = SequenceMatcher(None, result['text'], sentence).ratio()
-            if similarity >= finalSequences[1][index][2]:
-                start = finalSequences[1][index][0]
-                end = finalSequences[1][index][1]
-                entry['start'] = words_info[start]
-                entry['end']= words_info[start]
-                entry['words']= words_info[start:end]
-                index += 1
+            similarity = SequenceMatcher(None, entry['text'], sentence).ratio()
+            x = finalSequences[1]
+            if len(finalSequences[1]) > index:
+                if similarity >= finalSequences[1][index][2]:
+                    start = finalSequences[1][index][0]
+                    end = finalSequences[1][index][1]
+                    entry['start'] = words_info[start]['start']
+                    entry['end']= words_info[end]['end']
+                    entry['words']= words_info[start:end]
+                    print(index)
+                    index += 1
     return result
 
 #builds a list of places where the sentence occurs in the list of transcribed words from audio. can then take this list of places
@@ -84,7 +92,8 @@ def getSequences(words_in_sentence, no_spaces_sentence, words_count, words_list)
     sequences = []
     #create list of sequences of sentence
     for word in words_in_sentence:
-        word = word.replace(" " ,"")
+        word = word.replace(" " ,"").lower()
+        print(word + '\n')
         if word in words_count:
             locations = words_count[word]
             #first occurence of a word in the sentence
@@ -103,17 +112,21 @@ def getSequences(words_in_sentence, no_spaces_sentence, words_count, words_list)
 
                         #make sure location is greater than the current ending place if we want to change that value
                         elif (location > sequence[1]):
-                            new_sequences.append(sequence[0], location)
+                            new_sequences.append([sequence[0], location])
                             
                 #can add a sequence starting with this word here
                 #for location in locations :new_sequences.append(location,location)
                 sequences.extend(new_sequences)     
+                #remove duplicates
+                no_duplicates = []
+                [no_duplicates.append(seq) for seq in sequences if seq not in no_duplicates]
+                sequences = no_duplicates
 
     #only keep sequences with a greater than  65% match with original sentence
     more_accurate_sequences = []
     for seq in sequences:
         string = ''.join(words_list[seq[0]:seq[1]])
-        similarity = SequenceMatcher(None, no_spaces_sentence, string).ratio()
+        similarity = SequenceMatcher(None, no_spaces_sentence.lower(), string).ratio()
         if similarity > 0.65:
             seq.append(similarity)
             more_accurate_sequences.append(seq)
@@ -124,7 +137,6 @@ def getSequences(words_in_sentence, no_spaces_sentence, words_count, words_list)
 #assumption is that the sentences are correct and are present in both the text and audio. This assumption comes from
 #earlier step where any additional or lost sentences should not have made it into the sequences of accuracy above 65%
 def orderSequences(sentence_sequences):
-    text_sequences_and_list_of_sentence_sequences_in_it = []
     text_sequences = []
     number_of_sentences = 0
     for sentence_sequence in sentence_sequences:
@@ -149,7 +161,10 @@ def orderSequences(sentence_sequences):
             
             #can add a text sequence starting with this sentence here
             #for for sequence in sentence_sequence[1]: text_sequences.append([[sentence_sequence[0]], [sequence], sequence[2], 1])
-            text_sequences = new_text_sequences
+            text_sequences.extend(new_text_sequences)
+            no_duplicates = []
+            [no_duplicates.append(seq) for seq in text_sequences if seq not in no_duplicates]
+            text_sequences = no_duplicates
 
     #find text sequence with highest number of sentences used and highest similarity
     highest  = 0
@@ -339,6 +354,7 @@ def removePunctuation(string):
     return string
 
 def getTranscribedWords(data):
+    print("printing transcribed words\n")
     index = 0
     words_count = {}
     words_info = []
@@ -346,13 +362,15 @@ def getTranscribedWords(data):
     for segment in data:
         for word_info in segment['words']:
             #remove punctuation from word for better checking of match
-            word_info['word'] = removePunctuation(word_info['word']).replace(" " ,"")
+            word_info['word'] = removePunctuation(word_info['word']).replace(" " ,"").lower()
             #use word as a key and make a list of all the indexes where the word is in the original data
             if word_info['word'] in words_count:
                 words_count[word_info['word']].append(index)
             else:
                 words_count[word_info['word']] = [index]
             words_list.append(word_info['word'])
+            print(word_info['word'])
+            print('\n')
             words_info.append(word_info)
             index += 1
     return words_info, words_count,words_list

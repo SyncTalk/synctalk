@@ -9,7 +9,7 @@ from django.conf import settings
 from .textPreprocess import splitTextIntoSentences
 from .textPreprocess import writeToresult
 from .speechToText import getTimestamps
-from .translation import alignTranslation
+#from .translation import alignTranslation
 import os
 import json
 
@@ -52,14 +52,14 @@ class FileUploadView(APIView):
 
             
 
-            if translation_file:
-                translation_path = os.path.join(p,translation_file.name)
-                with open(translation_path, 'wb') as destination:
-                    for chunk in translation_file.chunks():
-                        destination.write(chunk)
-                print("tokenizing translation file")
-                split_transl_path = splitTextIntoSentences(translation_path,"en")
-                alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
+            #if translation_file:
+             #   translation_path = os.path.join(p,translation_file.name)
+              #  with open(translation_path, 'wb') as destination:
+               #     for chunk in translation_file.chunks():
+                #        destination.write(chunk)
+                #print("tokenizing translation file")
+                #split_transl_path = splitTextIntoSentences(translation_path,"en")
+                #alignTranslation(split_text_path,split_transl_path,RESULT_PATH)
 
                 # temp = open(RESULT_PATH,encoding="utf-8")
                 # response = json.load(temp)
@@ -76,7 +76,7 @@ class FileUploadView(APIView):
 
             
             #return alinged text
-            temp = open(RESULT_PATH,encoding="utf-8")
+            temp = open(RESULT_PATH,encoding="utf-8",errors='replace')
             response = json.load(temp)
             temp.close()
 
@@ -111,18 +111,4 @@ class FileUploadView(APIView):
     def get(self, request):
         return Response({'message':'hello world'})
 
-# class UploadViewSet(ViewSet):
-#     serializer_class = UploadSerializer
-#     def list(self,request):
-#         return Response({'message':'hello world'})
-#     def create(self,request):
-#         serializer = UploadSerializer(data=request.data)
-#         if serializer.is_valid():
-#             audio_file = serializer.validated_data.get('audio')
-#             text_file = serializer.validated_data.get('text')
-#             translation_file = serializer.validated_data.get('translation')
-#             # do some stuff with uploaded files
 
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

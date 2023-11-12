@@ -109,7 +109,7 @@ def splitTextIntoSentences(file_path, lang):
 
 def writeToresult(res_path,text_path):
     result = []
-    text = open(text_path,'r')
+    text = open(text_path,'r', encoding='utf-8')
     lines = text.read().splitlines() # list of strings
     text.close()
     for i, line in enumerate(lines, start=1):
