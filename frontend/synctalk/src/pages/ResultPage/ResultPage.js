@@ -9,8 +9,7 @@ const Result = () => {
   const location = useLocation();
   const resultData = location.state ? location.state.resultData : [];
   const parsedResultData = JSON.parse(resultData);
-  console.log(typeof parsedResultData);
-  console.log(parsedResultData);
+  const audioObjectURL = location.state ? location.state.audioObjectURL : "";
 
   useEffect(() => {
     // Update the scrolling every second
@@ -51,17 +50,21 @@ const Result = () => {
           {parsedResultData.map(({ id, start, end, text, translation }) => (
             <TextWithSpeaker
               ref={textPlayingRef}
-              key={id}
+              key={parseInt(id)}
+              id={parseInt(id)}
               text={text}
               translation={translation}
-              startTime={start}
-              endTime={end}
+              startTime={parseFloat(start)}
+              endTime={parseFloat(end)}
             />
           ))}
         </div>
       </div>
       <div className="footer">
-        <AudioPlayer onTimeUpdate={handleTimeUpdate} />
+        <AudioPlayer
+          audioObjectURL={audioObjectURL}
+          onTimeUpdate={handleTimeUpdate}
+        />
       </div>
     </div>
   );
