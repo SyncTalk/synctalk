@@ -16,7 +16,7 @@ SyncTalk is a web application designed to empower language learners by seamlessl
 | Qingyue Zhu   | Email: <qingyue2@student.unimelb.edu.au><br>GitHub: <https://github.com/QingyueZhu>   |
 | Warren Ang    | Email: <ang.warrenn@gmail.com><br>GitHub: <https://github.com/angwarrenn>             |
 
-### Documentation
+## Documentation
 
 - [Deployment Documentation](documentation/DEPLOYMENT.md)
 - [Architecture Documentation](documentation/TECHNICAL-ARTEFACTS.md)
