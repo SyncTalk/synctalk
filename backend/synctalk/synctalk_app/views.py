@@ -9,7 +9,7 @@ from django.conf import settings
 from .textPreprocess import splitTextIntoSentences
 from .textPreprocess import writeToresult
 from .speechToText import getTimestamps
-#from .translation import alignTranslation
+from .translation import alignTranslation
 import os
 import json
 
