@@ -9,7 +9,7 @@ from django.conf import settings
 from .textPreprocess import splitTextIntoSentences
 from .textPreprocess import writeToresult
 from .speechToText import getTimestamps
-from .translation import alignTranslation
+#from .translation import alignTranslation
 import os
 import json
 
@@ -62,9 +62,9 @@ class FileUploadView(APIView):
                 split_transl_path = splitTextIntoSentences(translation_path, "en")
                 alignTranslation(split_text_path, split_transl_path, RESULT_PATH)
 
-                # temp = open(RESULT_PATH,encoding="utf-8")
-                # response = json.load(temp)
-                # temp.close()
+                temp = open(RESULT_PATH,encoding="utf-8")
+                response = json.load(temp)
+                temp.close()
                 # return Response(response, status=status.HTTP_200_OK)
 
             # save the audio file
@@ -75,29 +75,13 @@ class FileUploadView(APIView):
             print("getting timestamps")
             timestamps = getTimestamps(audio_path, split_text_path, RESULT_PATH)
 
-            # return alinged text
-            temp = open(RESULT_PATH, encoding="utf-8")
+            
+            #return alinged text
+            temp = open(RESULT_PATH,encoding="utf-8",errors='replace')
             response = json.load(temp)
             temp.close()
 
-            # # Process the segments
-            # for key in sorted(response.keys(), key=lambda x: int(x)):
-            #     segment = response[key]
-            #     print(segment)
-
-            #     # Recalculate start time if it's -1 based on the end time of the previous segment
-            #     if segment["start"] == -1:
-            #         segment["start"] = start_time+0.1
-
-            #     # Recalculate end time if it's -1 based on the start time of the next segment
-            #     if segment["end"] == -1:
-            #         next_key = str(int(key) + 1)
-            #         if next_key in response:
-            #             next_segment = response[next_key]
-            #             segment["end"] = next_segment["start"]-0.1
-
-            #     # Update start_time for the next iteration
-            #     start_time = segment["end"]
+        
 
             # Convert the modified data back to a JSON string
             response = json.dumps(response, ensure_ascii=False, indent=4)
@@ -112,18 +96,3 @@ class FileUploadView(APIView):
         return Response({"message": "hello world"})
 
 
-# class UploadViewSet(ViewSet):
-#     serializer_class = UploadSerializer
-#     def list(self,request):
-#         return Response({'message':'hello world'})
-#     def create(self,request):
-#         serializer = UploadSerializer(data=request.data)
-#         if serializer.is_valid():
-#             audio_file = serializer.validated_data.get('audio')
-#             text_file = serializer.validated_data.get('text')
-#             translation_file = serializer.validated_data.get('translation')
-#             # do some stuff with uploaded files
-
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
