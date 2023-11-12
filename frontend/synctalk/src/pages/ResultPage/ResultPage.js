@@ -8,8 +8,10 @@ const Result = () => {
   const textPlayingRef = useRef(null);
   const location = useLocation();
   const resultData = location.state ? location.state.resultData : [];
-  const parsedResultData = JSON.parse(resultData);
+  const parsedResultData = resultData ? JSON.parse(resultData) : {};
   const audioObjectURL = location.state ? location.state.audioObjectURL : "";
+
+  console.log(parsedResultData);
 
   useEffect(() => {
     // Update the scrolling every second
