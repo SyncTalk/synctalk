@@ -104,11 +104,13 @@ export const DownloadBtnHtml = () => {
 
   const handleDownloadClick = () => {
     const htmlContent = getPageHtml();
-    const blob = new Blob([htmlContent], { type: "text/html" });
+    const jsonContent = JSON.stringify({ html: htmlContent });
+
+    const blob = new Blob([jsonContent], { type: "application/json" });
 
     const a = document.createElement("a");
     a.href = window.URL.createObjectURL(blob);
-    a.download = "result.html";
+    a.download = "result.json";
 
     a.click();
 

@@ -50,8 +50,7 @@ const Result = () => {
           {parsedResultData.map(({ id, start, end, text, translation }) => (
             <TextWithSpeaker
               ref={textPlayingRef}
-              key={parseInt(id)}
-              id={parseInt(id)}
+              key={id}
               text={text}
               translation={translation}
               startTime={parseFloat(start)}
