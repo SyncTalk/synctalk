@@ -7,11 +7,18 @@ import "./ResultPage.css";
 const Result = () => {
   const textPlayingRef = useRef(null);
   const location = useLocation();
-  const resultData = location.state ? location.state.resultData : [];
-  const parsedResultData = resultData ? JSON.parse(resultData) : {};
+  const resultData = location.state ? location.state.resultData : "";
+  const parsedResultData = resultData ? JSON.parse(resultData) : [];
   const audioObjectURL = location.state ? location.state.audioObjectURL : "";
 
+  console.log(resultData);
   console.log(parsedResultData);
+
+  if (!Array.isArray(parsedResultData)) {
+    console.error("parsedResultData is not an array:", parsedResultData);
+    // You may want to handle this error state gracefully
+    return null;
+  }
 
   useEffect(() => {
     // Update the scrolling every second
@@ -49,16 +56,19 @@ const Result = () => {
       </div>
       <div className="body">
         <div className="text-container">
-          {parsedResultData.map(({ id, start, end, text, translation }) => (
-            <TextWithSpeaker
-              ref={textPlayingRef}
-              key={id}
-              text={text}
-              translation={translation}
-              startTime={parseFloat(start)}
-              endTime={parseFloat(end)}
-            />
-          ))}
+          {parsedResultData.map(
+            ({ id, start, end, text, translation }, index) => (
+              <TextWithSpeaker
+                key={index}
+                id={parseInt(id)}
+                text={text}
+                translation={translation}
+                startTime={parseFloat(start)}
+                endTime={parseFloat(end)}
+                ref={index === 0 ? textPlayingRef : null}
+              />
+            ),
+          )}
         </div>
       </div>
       <div className="footer">

@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-const TextWithSpeaker = ({
+const TextWithSpeaker = React.forwardRef(function TextWithSpeakerComponent(
+  { text, translation, startTime, endTime },
   ref,
-  id,
-  text,
-  translation,
-  startTime,
-  endTime,
-}) => {
+) {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
+
   const handleAudioClick = () => {
     const audio = document.getElementById("audio");
     setIsClicked(true);
@@ -24,6 +21,7 @@ const TextWithSpeaker = ({
       setIsPlaying(true);
     }
   };
+
   useEffect(() => {
     const audio = document.getElementById("audio");
     const handleTimeUpdate = () => {
@@ -40,10 +38,12 @@ const TextWithSpeaker = ({
       }
     };
     audio.addEventListener("timeupdate", handleTimeUpdate);
+
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [currentTime, isClicked, startTime, endTime]);
+
   useEffect(() => {
     if (currentTime >= startTime && currentTime < endTime) {
       setIsCurrent(true);
@@ -51,6 +51,7 @@ const TextWithSpeaker = ({
       setIsCurrent(false);
     }
   }, [currentTime, startTime, endTime]);
+
   const handleWordClick = async (event) => {
     const word = event.target.textContent;
     const response = await fetch(
@@ -106,14 +107,15 @@ const TextWithSpeaker = ({
   wordElements.forEach((wordElement) => {
     wordElement.addEventListener("dblclick", handleWordClick);
   });
+
   return (
     <div
       className={`text-with-speaker ${isCurrent ? "playing" : ""}`}
       ref={ref}
     >
       <span className={`text ${isCurrent ? "playing" : ""}`}>
-        {text.split(" ").map((word) => (
-          <span key={id} id="word" onClick={handleWordClick}>
+        {text.split(" ").map((word, index) => (
+          <span key={index} className="word" onClick={handleWordClick}>
             {word}{" "}
           </span>
         ))}
@@ -131,13 +133,16 @@ const TextWithSpeaker = ({
       </span>
     </div>
   );
-};
+});
+
+TextWithSpeaker.displayName = "TextWithSpeaker";
+
 TextWithSpeaker.propTypes = {
-  ref: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   translation: PropTypes.string.isRequired,
   startTime: PropTypes.number.isRequired,
   endTime: PropTypes.number.isRequired,
 };
+
 export default TextWithSpeaker;

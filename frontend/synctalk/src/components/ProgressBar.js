@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ProgressBar = ({ currentTime, duration }) => {
+  if (isNaN(duration) || duration <= 0) {
+    return <div>Loading...</div>; // or any other fallback
+  }
+
   const handleSeek = (event) => {
     const audio = document.getElementById("audio");
     const seekTime =
