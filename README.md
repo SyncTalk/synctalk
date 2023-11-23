@@ -1,24 +1,32 @@
-# COMP30022-IT-Project
+# SyncTalk
 
-> **Team 27 SyncTalk**
+## Table of Contents
+
+- [SyncTalk](#synctalk)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Team Information](#team-information)
+  - [Documentation](#documentation)
 
 ## Project Overview
 
 SyncTalk is a web application designed to empower language learners by seamlessly aligning audio, transcriptions, and translations. We utilizes the Whisper model, an automatic speech recognition system developed by OpenAI, to ensure high accuracy in aligning audio with text, Additionally, we leverage the Microsoft Translator API to provide word-level annotation, enabling users to explore the meanings, pronunciations, and context of specific words.
 
-## The Team
+[Using Public Domain Resources and Off-the-Shelf Tools to Produce High-Quality Multimedia Texts](documentation/Using%20Public%20Domain%20Resources%20and%20Off-the-Shelf%20Tools%20to%20Produce%20High-Quality%20Multimedia%20Texts.pdf)
 
-Shan Mou Liew [shanmou@rocketmail.com](mailto:shanmou@rocketmail.com "mailto:shanmou@rocketmail.com")
+## Team Information
 
-Rosa Yan [yanrr@student.unimelb.edu.au](mailto:yanrr@student.unimelb.edu.au "mailto:yanrr@student.unimelb.edu.au")
+|     Member    |                                  Contact Details                                  |
+|:-------------:|:---------------------------------------------------------------------------------:|
+| Shan Mou Liew | Email: <shanmou@rocketmail.com><br>GitHub: <https://github.com/Jliew1113>             |
+| Rosa Yan      | Email: <yanrr@student.unimelb.edu.au><br>GitHub: <https://github.com/yanrx030>        |
+| Ilan Rathner  | Email: <irathner@student.unimelb.edu.au><br>GitHub: <https://github.com/ilanrathner>  |
+| Qingyue Zhu   | Email: <qingyue2@student.unimelb.edu.au><br>GitHub: <https://github.com/QingyueZhu>   |
+| Warren Ang    | Email: <ang.warrenn@gmail.com><br>GitHub: <https://github.com/angwarrenn>             |
 
-Ilan Rathner [irathner@student.unimelb.edu.au](mailto:irathner@student.unimelb.edu.au "mailto:irathner@student.unimelb.edu.au")
+## Documentation
 
-Jessica Zhu [qingyue2@student.unimelb.edu.au](mailto:qingyue2@student.unimelb.edu.au "mailto:qingyue2@student.unimelb.edu.au")
-
-Warren Ang [ang.warrenn@gmail.com](mailto:ang.warrenn@gmail.com"mailto:ang.warrenn@gmail.com")
-
-### Documentation
-
-[Frontend Documentation](frontend/synctalk/README.md)<br/>
-[Backend Documentation](backend/README.md)
+- [Deployment Documentation](documentation/DEPLOYMENT.md)
+- [Architecture Documentation](documentation/TECHNICAL-ARTEFACTS.md)
+- [Frontend Documentation](frontend/synctalk/README.md)
+- [Backend Documentation](backend/README.md)

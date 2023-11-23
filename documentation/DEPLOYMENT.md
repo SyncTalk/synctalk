@@ -4,21 +4,21 @@
 
 - [Deployment](#deployment)
   - [Table of Contents](#table-of-contents)
-    - [Local Machine](#local-machine)
-      - [Requirements](#requirements)
-      - [Steps](#steps)
-    - [Production Server](#production-server)
-      - [Requirements](#requirements-1)
-      - [Steps](#steps-1)
+  - [Local Machine](#local-machine)
+    - [Requirements](#requirements)
+    - [Steps](#steps)
+  - [Production Server](#production-server)
+    - [Requirements](#requirements-1)
+    - [Steps](#steps-1)
 
-### Local Machine
+## Local Machine
 
-#### Requirements
+### Requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Git](https://git-scm.com/downloads)
 
-#### Steps
+### Steps
 
 1. Open a terminal and change directory to the desired location for the repository to be cloned into
 
@@ -56,14 +56,14 @@
 
     <http://localhost:3000>
 
-### Production Server
+## Production Server
 
-#### Requirements
+### Requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Git](https://git-scm.com/downloads)
 
-#### Steps
+### Steps
 
 1. Open a terminal and SSH into the server
 

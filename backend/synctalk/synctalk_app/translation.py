@@ -1,3 +1,4 @@
+
 from deep_translator import GoogleTranslator
 import os
 from django.conf import settings
@@ -74,3 +75,12 @@ def alignTranslation(text_path, translation_path, RESULT_PATH):
     with open(RESULT_PATH, "w", encoding="utf-8") as json_file:
         json.dump(result, json_file, ensure_ascii=False)
     return
+
+
+
+
+
+
+
+
+
