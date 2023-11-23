@@ -53,6 +53,7 @@ const TextWithSpeaker = React.forwardRef(function TextWithSpeakerComponent(
   }, [currentTime, startTime, endTime]);
 
   const handleWordClick = async (event) => {
+    /* disable bing translator 
     const word = event.target.textContent;
     const response = await fetch(
       `https://api.cognitive.microsofttranslator.com/detect?api-version=3.0`,
@@ -82,6 +83,8 @@ const TextWithSpeaker = React.forwardRef(function TextWithSpeakerComponent(
     );
     const translationData = await translationResponse.json();
     const translation = translationData[0].translations[0].text;
+    */
+    const translation = "Service Currently Not Available";
 
     const popup = document.createElement("div");
     popup.textContent = ` Translation: ${translation}`;
